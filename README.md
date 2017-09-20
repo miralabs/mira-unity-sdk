@@ -1,8 +1,8 @@
-![](https://www.mirareality.com/static/Mira-Logo_Gray_512.png)
+<a href="https://www.mirareality.com"><img src="https://www.mirareality.com/static/Mira-Logo_Gray_1024.png" width="512"></a>
 # Mira Unity SDK
-![mira-developers.slack.com](https://devslack.mirareality.com/badge.svg)
+<a href="https://devslack.mirareality.com/"><img alt="mira-developers.slack.com" src="https://devslack.mirareality.com/badge.svg"></a>
 
-This Project contains Mira's Unity-based SDK for developing with the Mira Prism.
+This project contains Mira's Unity-based SDK for developing with the Mira Prism.
 
 All scripts under MiraSDK/Scripts should not be edited.
 
