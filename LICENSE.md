@@ -2,7 +2,7 @@ Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
 
 Downloading and/or using this MIRA SDK is under license from MIRA,
 and subject to all terms and conditions of the Mira Software License,
-found here: www.mirareality.com/sdk-license/
+found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
 
 By downloading this SDK, you agree to the Mira Software License.
 
