@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6e480c919d4caf44f86b0515efdb8b32
+timeCreated: 1467009678
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - m_ControllerDataTxt: {fileID: 4900000, guid: 00baab2769d460b44affd4dab1726f2c,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

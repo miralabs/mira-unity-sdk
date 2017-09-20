@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &136670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 400788}
+  - component: {fileID: 11419900}
+  m_Layer: 0
+  m_Name: PlayerPrefsEx-Default
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400788
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11419900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec97717468c5224ba3c3b728dd991b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapPlayerPrefsEx:
+    m_Data: []
+  mapInt:
+    m_Data:
+    - key: VRDevice.useFade
+      value: 0
+    - key: VRDevice.forceFadeOnBadTracking
+      value: 0
+    - key: VRDevice.useReticle
+      value: 0
+    - key: XimmerseDevice.type
+      value: 4112
+    - key: XimmerseTracker[Inside-out].fixShake
+      value: 1
+    - key: UINotification-OutOfRange.enabled
+      value: 0
+    - key: UINotification-DeviceDashboard.enabled
+      value: 0
+    - key: PlayArea.enabled
+      value: 1
+    - key: PlayArea.drawGround
+      value: 1
+    - key: PlayArea.drawWall
+      value: 1
+    - key: PlayArea.showCameraModel
+      value: 1
+    - key: xdevice.logLevel
+      value: 2
+    - key: xdevice.noServicesInAndroid
+      value: 1
+    - key: 
+      value: 0
+  mapFloat:
+    m_Data:
+    - key: VRDevice.fadeTime
+      value: 2
+    - key: VRDevice.badFadeTime
+      value: 0.5
+    - key: XimmerseTracker[Inside-out].m2pLatency
+      value: 0.04
+    - key: PlayArea.warningDistance
+      value: 0.5
+    - key: PlayArea.borderThickness
+      value: 0.15
+    - key: PlayArea.thickness
+      value: 0.0075
+    - key: PlayArea.height
+      value: 2.5
+    - key: PlayArea.cellSize
+      value: 0.25
+    - key: PlayArea.emptySize
+      value: 0.05
+    - key: 
+      value: 0
+  mapString:
+    m_Data:
+    - key: 
+      value: 
+  mapVector3:
+    m_Data:
+    - key: XimmerseTracker[Outside-in].position
+      value: {x: 0, y: 1.675, z: 1.5}
+    - key: XimmerseTracker[Outside-in].rotation
+      value: {x: 15, y: 180, z: 0}
+    - key: ArmModel.shoulderPosition
+      value: {x: 0.19, y: -0.19, z: -0.03}
+    - key: ArmModel.elbowPosition
+      value: {x: 0.195, y: -0.5, z: -0.075}
+    - key: ArmModel.wristPosition
+      value: {x: 0, y: 0, z: 0.25}
+    - key: ArmModel.pointerPosition
+      value: {x: 0, y: -0.009, z: 0.099}
+    - key: 
+      value: {x: 0, y: 0, z: 0}
+  mapColor:
+    m_Data:
+    - key: VRDevice.fadeColor
+      value: {r: 0.30588236, g: 0.3529412, b: 0.3921569, a: 1}
+    - key: VRDevice.badFadeColor
+      value: {r: 0.30588236, g: 0.3529412, b: 0.3921569, a: 1}
+    - key: PlayArea.groundColor
+      value: {r: 0, g: 1, b: 1, a: 1}
+    - key: PlayArea.wallColor
+      value: {r: 0, g: 1, b: 1, a: 1}
+    - key: 
+      value: {r: 0, g: 0, b: 0, a: 0}
+  mapObject:
+    m_Data:
+    - key: VRDevice.reticleObject
+      value: {fileID: 118374, guid: a01df677854b54341a6de41427cda46d, type: 2}
+    - key: UINotification-OutOfRange-LeftController
+      value: {fileID: 199512, guid: 2e2e3ac6f1308664e817d247a2f69882, type: 2}
+    - key: UINotification-OutOfRange-RightController
+      value: {fileID: 123334, guid: 9eab136299c61d744b54be55a7807fa8, type: 2}
+    - key: UINotification-OutOfRange-Hmd
+      value: {fileID: 123526, guid: d8cb09368e69b2e4b9591a494890eae3, type: 2}
+    - key: VRDevice.source
+      value: {fileID: 151124, guid: b9b0e253f3254234a933fd1dfea17140, type: 2}
+    - key: PlayAreaRenderer
+      value: {fileID: 167788, guid: 41d5e925601f5cf4d9078d5679441e01, type: 2}
+    - key: 
+      value: {fileID: 0}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 136670}
+  m_IsPrefabParent: 1

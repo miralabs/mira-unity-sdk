@@ -1,0 +1,13 @@
+//
+//  Wikitude2EditorBridge_Debug.xcconfig
+//  Wikitude2UnityBridge
+//
+//  Created by Alexandru Florea on 23/03/16.
+//  Copyright (c) 2016 Wikitude. All rights reserved.
+//
+
+
+#include "../_Configuration_Common.xcconfig"
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) $(_COMMON_PREPROCESSOR_DEFINITIONS) DEBUG_BUILD SDK_ENABLE_LOGGING

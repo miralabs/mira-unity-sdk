@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Planets2
+  m_Shader: {fileID: 4800000, guid: 22809332eb72c4e6d91369b41e0f9859, type: 3}
+  m_ShaderKeywords: FL_COLORS_LOCAL FL_SYMETRIC_COLORS_ON FL_VERTEX_COLOR
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CustomLightmap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BlendedLightSmoothness: 0
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _GradientBlending: 0
+    - _GradientOffset: 0
+    - _GradientOriginOffsetNegativeX: 3
+    - _GradientOriginOffsetNegativeY: 3
+    - _GradientOriginOffsetNegativeZ: 3
+    - _GradientOriginOffsetPositiveX: 3
+    - _GradientOriginOffsetPositiveY: 3
+    - _GradientOriginOffsetPositiveZ: 3
+    - _GradientWidth: 3
+    - _GradientWidthNegativeX: 0
+    - _GradientWidthNegativeY: 0
+    - _GradientWidthNegativeZ: 0
+    - _GradientWidthPositiveX: 0
+    - _GradientWidthPositiveY: 0
+    - _GradientWidthPositiveZ: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _ShadowBoost: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVChannel: 0
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Ambient_Light: {r: 1, g: 1, b: 1, a: 1}
+    - _BlendedLightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BlendedLightIntensities: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GradienColorGoal: {r: 1, g: 1, b: 1, a: 1}
+    - _GradientUnitAxis: {r: 0, g: 1, b: 0, a: 0}
+    - _LightNegative2X: {r: 1, g: 1, b: 1, a: 1}
+    - _LightNegative2Y: {r: 1, g: 1, b: 1, a: 1}
+    - _LightNegative2Z: {r: 1, g: 1, b: 1, a: 1}
+    - _LightNegativeX: {r: 1, g: 1, b: 1, a: 1}
+    - _LightNegativeY: {r: 1, g: 1, b: 1, a: 1}
+    - _LightNegativeZ: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPositive2X: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPositive2Y: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPositive2Z: {r: 1, g: 1, b: 1, a: 1}
+    - _LightPositiveX: {r: 0.17679496, g: 0.6205302, b: 0.8014706, a: 1}
+    - _LightPositiveY: {r: 0.6366782, g: 0.9411765, b: 0.7143777, a: 1}
+    - _LightPositiveZ: {r: 0.5101419, g: 0.22794116, b: 1, a: 1}
+    - _ShadowTint: {r: 1, g: 1, b: 1, a: 1}

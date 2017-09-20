@@ -1,0 +1,33 @@
+//
+//  _Configuration_Common.xcconfig
+//  Wikitude2UnityBridge
+//
+//  Created by Alexandru Florea on 23/03/16.
+//  Copyright (c) 2016 Wikitude. All rights reserved.
+//
+
+
+// ** COMPILER ** //
+
+// ** Variables ** //
+//: configuration = common
+// _COMMON_PREPROCESSOR_DEFINITIONS = TARGET_OS_IPHONE NEON_AVAILABLE _REENTRANT DSO_DLFCN HAVE_DLFCN_H L_ENDIAN
+
+// _COMMON_PREPROCESSOR_DEFINITIONS_SIMULATOR = $(_COMMON_PREPROCESSOR_DEFINITIONS) WT_SIMULATOR_BUILD
+
+// ** Settings ** //
+//:configuration = common
+HEADER_SEARCH_PATHS = $(inherited) /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+
+//:configuration = common
+USER_HEADER_SEARCH_PATHS = $(inherited) $(WT_MUSKETIR_INCLUDE) $(WT_MUSKETIR_HOME)/src/service/inspector $(WT_COMMON_CODE_INCLUDE)
+
+//:configuration = common
+CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES
+
+
+// ** LINKER ** //
+
+LIBRARY_SEARCH_PATHS = $(inerited) $(WT_DEPENDENCIES_HOME)/mac_osx/libcurl/lib $(WT_MUSKETIR_HOME)/thirdparty_builds/mac_osx/opencv/lib $(WT_DEPENDENCIES_HOME)/mac_osx/libjpeg/lib $(WT_DEPENDENCIES_HOME)/mac_osx/libceres/lib $(WT_DEPENDENCIES_HOME)/mac_osx/libgflags/lib $(WT_DEPENDENCIES_HOME)/mac_osx/libglog/lib $(WT_DEPENDENCIES_HOME)/mac_osx/suiteSparse/lib $(WT_MUSKETIR_HOME)/thirdparty_builds/mac_osx/freeimage
+
+OTHER_LDFLAGS = $(inherited) -llibpng -llibjpeg -llibjasper -lfreeimage -llibtiff -lglog -ObjC

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 47e0acd41736a4b73a130b8f356daf55
+labels:
+- flat
+- lighting
+- low
+- poly
+timeCreated: 1469130798
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 8a77a85899d384620bcd2baf19ccdd29, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

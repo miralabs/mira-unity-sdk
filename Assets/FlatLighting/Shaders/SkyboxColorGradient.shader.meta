@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 78af37c3adc1c4c35ae3f7b62cca2916
+labels:
+- gradient
+- procedural
+- skybox
+timeCreated: 1475431455
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

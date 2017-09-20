@@ -1,0 +1,6 @@
+framework module WikitudeMiraSDK {
+  umbrella header "WikitudeMiraSDK.h"
+
+  export *
+  module * { export * }
+}

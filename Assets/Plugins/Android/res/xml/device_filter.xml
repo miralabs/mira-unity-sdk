@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--              VID=0x1F3B        PID=0x10FF-->
+	<usb-device vendor-id="7995" product-id="4351" />
+	<!--              VID=0x1F3B        PID=0x1000-->
+	<usb-device vendor-id="7995" product-id="4096" />
+	<!--              VID=0x1F3B        PID=0x10F0-->
+	<usb-device vendor-id="7995" product-id="4336" />
+	<!--              VID=0x1F3B        PID=0x10F1-->
+	<usb-device vendor-id="7995" product-id="4337" />
+	<!--              VID=0x1F3B        PID=0x10F2-->
+	<usb-device vendor-id="7995" product-id="4338" />
+</resources>

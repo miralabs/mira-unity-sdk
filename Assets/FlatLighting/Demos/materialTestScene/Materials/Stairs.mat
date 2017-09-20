@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Stairs
+  m_Shader: {fileID: 4800000, guid: 22809332eb72c4e6d91369b41e0f9859, type: 3}
+  m_ShaderKeywords: FL_CASTSHADOW_ON FL_COLORS_WORLD FL_DIRECTIONAL_LIGHT FL_GRADIENT_AXIS_OFF
+    FL_GRADIENT_WORLD FL_POINT_LIGHT FL_RECEIVESHADOWS FL_SPOT_LIGHT FL_SYMETRIC_COLORS_OFF
+    SC_AMBIENT_LIGHT SC_COLORS_WORLD SC_DIRECTIONAL_LIGHT SC_GRADIENT SC_POINT_LIGHT
+    SC_RECEIVESHADOWS SC_SPOT_LIGHT SC_SYMETRIC_COLORS_ON SC_UNITY_LIGHTMAPPING
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BumpMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _CustomLightmap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailAlbedoMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmissionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0.21, y: -0.07}
+    - first:
+        name: _MetallicGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _OcclusionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ParallaxMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _BlendedLightSmoothness
+      second: 0
+    - first:
+        name: _BumpScale
+      second: 1
+    - first:
+        name: _Cutoff
+      second: 0.5
+    - first:
+        name: _DetailNormalMapScale
+      second: 1
+    - first:
+        name: _DstBlend
+      second: 0
+    - first:
+        name: _Glossiness
+      second: 0.5
+    - first:
+        name: _GradientBlending
+      second: 0
+    - first:
+        name: _GradientOffset
+      second: 1
+    - first:
+        name: _GradientOriginOffsetNegativeX
+      second: 3
+    - first:
+        name: _GradientOriginOffsetNegativeY
+      second: 3
+    - first:
+        name: _GradientOriginOffsetNegativeZ
+      second: 3
+    - first:
+        name: _GradientOriginOffsetPositiveX
+      second: 3
+    - first:
+        name: _GradientOriginOffsetPositiveY
+      second: 3
+    - first:
+        name: _GradientOriginOffsetPositiveZ
+      second: 3
+    - first:
+        name: _GradientPosHigh
+      second: 1.4
+    - first:
+        name: _GradientPosLow
+      second: 0
+    - first:
+        name: _GradientWidth
+      second: 4
+    - first:
+        name: _GradientWidthNegativeX
+      second: 0
+    - first:
+        name: _GradientWidthNegativeY
+      second: 0
+    - first:
+        name: _GradientWidthNegativeZ
+      second: 0
+    - first:
+        name: _GradientWidthPositiveX
+      second: 0
+    - first:
+        name: _GradientWidthPositiveY
+      second: 0
+    - first:
+        name: _GradientWidthPositiveZ
+      second: 0
+    - first:
+        name: _Metallic
+      second: 0
+    - first:
+        name: _Mode
+      second: 0
+    - first:
+        name: _OcclusionStrength
+      second: 1
+    - first:
+        name: _Parallax
+      second: 0.02
+    - first:
+        name: _ShadowBoost
+      second: 0
+    - first:
+        name: _SrcBlend
+      second: 1
+    - first:
+        name: _UVChannel
+      second: 1
+    - first:
+        name: _UVSec
+      second: 0
+    - first:
+        name: _ZWrite
+      second: 1
+    - first:
+        name: _yGradientPosHigh
+      second: 5.29
+    - first:
+        name: _yGradientPosLow
+      second: 0
+    - first:
+        name: _yGradientPower
+      second: 0.15
+    m_Colors:
+    - first:
+        name: _Ambient_Light
+      second: {r: 0.44117647, g: 0.44117647, b: 0.44117647, a: 1}
+    - first:
+        name: _BlendedLightColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _BlendedLightIntensities
+      second: {r: 0, g: 1, b: 0, a: 0}
+    - first:
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _GradienColorGoal
+      second: {r: 0.14338236, g: 0.19117647, b: 0.15458925, a: 1}
+    - first:
+        name: _GradientUnitAxis
+      second: {r: 0, g: 1, b: 0, a: 0}
+    - first:
+        name: _LightNegative2X
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightNegative2Y
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightNegative2Z
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightNegativeX
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - first:
+        name: _LightNegativeY
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - first:
+        name: _LightNegativeZ
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - first:
+        name: _LightPositive2X
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightPositive2Y
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightPositive2Z
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _LightPositiveX
+      second: {r: 0.24653979, g: 0.44117647, b: 0.40090683, a: 1}
+    - first:
+        name: _LightPositiveY
+      second: {r: 0.23194206, g: 0.4044118, b: 0.2402682, a: 1}
+    - first:
+        name: _LightPositiveZ
+      second: {r: 0.3803335, g: 0.45588237, b: 0.1676038, a: 1}
+    - first:
+        name: _ShadowTint
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}

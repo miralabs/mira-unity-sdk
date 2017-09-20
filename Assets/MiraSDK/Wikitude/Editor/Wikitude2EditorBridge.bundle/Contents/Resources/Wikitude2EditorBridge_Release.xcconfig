@@ -1,0 +1,13 @@
+//
+//  Wikitude2EditorBridge_Release.xcconfig
+//  Wikitude2UnityBridge
+//
+//  Created by Alexandru Florea on 23/03/16.
+//  Copyright (c) 2016 Wikitude. All rights reserved.
+//
+
+
+#include "../_Configuration_Common.xcconfig"
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) $(_COMMON_PREPROCESSOR_DEFINITIONS)

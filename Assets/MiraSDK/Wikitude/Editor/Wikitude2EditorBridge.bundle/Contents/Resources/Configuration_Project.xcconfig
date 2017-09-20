@@ -1,0 +1,15 @@
+//
+//  Configuration_Project.xcconfig
+//  Wikitude2UnityBridge
+//
+//  Created by Alexandru Florea on 23/03/16.
+//  Copyright (c) 2016 Wikitude. All rights reserved.
+//
+
+// ** COMPILER ** //
+//:configuration = common
+ENABLE_BITCODE = NO
+
+
+// ** LINKER ** //
+// /* Intentionally Left Blank */

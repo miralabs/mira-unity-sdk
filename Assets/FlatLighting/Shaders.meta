@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d8898009d24ad4ca7985271489408d7c
+labels:
+- Mapping
+- Shadow
+- flat
+- gradient
+- lighting
+- low
+- poly
+- procedural
+- skybox
+folderAsset: yes
+timeCreated: 1455808823
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
