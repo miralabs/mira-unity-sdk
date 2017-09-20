@@ -1,5 +1,6 @@
-![](https://files.readme.io/e1079f0-small-Mira_Logo_Digital_Dark.png)
+![](https://www.mirareality.com/static/Mira-Logo_Gray_512.png)
 # Mira Unity SDK
+![mira-developers.slack.com](https://devslack.mirareality.com/badge.svg)
 
 This Project contains Mira's Unity-based SDK for developing with the Mira Prism.
 
