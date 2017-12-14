@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using System.Collections;
 using UnityEngine;
@@ -30,7 +28,9 @@ namespace Mira
         /// This is more performant, as it does not continue to perform orientation checks.
         /// This is useful for displaying the "Please insert your phone into the headset" screen
         /// </summary>
-        public bool displayOnce = true;
+        bool displayOnce = true;
+
+        public GameObject MiraCameraRig;
 
         private Canvas instructionScreen;
         public Camera twoDCamera;
@@ -49,13 +49,14 @@ namespace Mira
 
         private IEnumerator Start()
         {
+
             QualitySettings.antiAliasing = 4;
             yield return new WaitForEndOfFrame();
             instructionScreen = transform.GetComponentInChildren<Canvas>();
-            distortionL = GameObject.Find("DistortionCameraL").GetComponent<Camera>();
-            distortionR = GameObject.Find("DistortionCameraR").GetComponent<Camera>();
-            distortionL.gameObject.SetActive(false);
-            distortionR.gameObject.SetActive(false);
+            // distortionL = GameObject.Find("DistortionCameraL").GetComponent<Camera>();
+            // distortionR = GameObject.Find("DistortionCameraR").GetComponent<Camera>();
+            // distortionL.gameObject.SetActive(false);
+            // distortionR.gameObject.SetActive(false);
         }
 
         private void OrientationChecker(Vector2 resolution)
@@ -77,8 +78,9 @@ namespace Mira
         private IEnumerator TransitionToLandscape()
         {
             QualitySettings.antiAliasing = 0;
-            distortionL.gameObject.SetActive(true);
-            distortionR.gameObject.SetActive(true);
+            // distortionL.gameObject.SetActive(true);
+            // distortionR.gameObject.SetActive(true);
+            MiraCameraRig.SetActive(true);
             twoDCamera.gameObject.SetActive(false);
             instructionScreen.gameObject.SetActive(false);
             if (displayOnce)
@@ -89,8 +91,9 @@ namespace Mira
         private IEnumerator TransitionToPortrait()
         {
             QualitySettings.antiAliasing = 4;
-            distortionL.gameObject.SetActive(false);
-            distortionR.gameObject.SetActive(false);
+            // distortionL.gameObject.SetActive(false);
+            // distortionR.gameObject.SetActive(false);
+            MiraCameraRig.SetActive(false);
             twoDCamera.gameObject.SetActive(true);
             instructionScreen.gameObject.SetActive(true);
             yield return null;

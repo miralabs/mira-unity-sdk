@@ -70,9 +70,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4842084456911934}
   - component: {fileID: 81834102525391746}
-  - component: {fileID: 114101558981840482}
   - component: {fileID: 114342694385810492}
   - component: {fileID: 114788456747264248}
+  - component: {fileID: 114101558981840482}
   - component: {fileID: 114099443315531364}
   m_Layer: 0
   m_Name: MiraARCamera
@@ -123,8 +123,26 @@ GameObject:
   m_Component:
   - component: {fileID: 4663135421151384}
   - component: {fileID: 114049221567413274}
+  - component: {fileID: 114118976432125302}
   m_Layer: 0
   m_Name: BTController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1880266931065364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4357840656061574}
+  - component: {fileID: 114333910273660100}
+  - component: {fileID: 114794706844960302}
+  m_Layer: 0
+  m_Name: MiraLivePreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +192,7 @@ Transform:
   m_Children:
   - {fileID: 4701798572140412}
   m_Father: {fileID: 4347858370555828}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4347858370555828
 Transform:
@@ -186,12 +204,26 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4357840656061574}
   - {fileID: 4842084456911934}
   - {fileID: 4663135421151384}
   - {fileID: 4822155058679350}
   - {fileID: 4161729434929544}
   - {fileID: 4451978393970610}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4357840656061574
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880266931065364}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4347858370555828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4451978393970610
@@ -205,7 +237,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4347858370555828}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4663135421151384
 Transform:
@@ -220,7 +252,7 @@ Transform:
   - {fileID: 4935714926203010}
   - {fileID: 4829553814391106}
   m_Father: {fileID: 4347858370555828}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4701798572140412
 Transform:
@@ -246,7 +278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4347858370555828}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4829553814391106
 Transform:
@@ -272,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4347858370555828}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4935714926203010
 Transform:
@@ -318,7 +350,8 @@ MonoBehaviour:
   armOffsetX: 10
   armOffsetY: -40
   armOffsetZ: 40
-  angleTilt: 5
+  angleTiltX: 15
+  angleTiltY: -5
 --- !u!114 &114053140264756752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: -37933721, guid: 74f59eb22abf947599d3aecf24b954b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WikitudeLicenseKey: aUBXdlLc+nZRzK9+HqXxcJEY5uzk69eb2lnoDeAuJORRjwqcqfUKf09KmPar2geaKuoloVy3IGKA0ykdf6PQzbGgJaRB876nuBuxoQ6kRXsJcx5+ZlsJml27YnyfiChJu4QYoSlvokMmDHDFlGdZZgVfZT30gp7ZS9z6TBvvcH1TYWx0ZWRfX3RKJKhHbzt8TLKz0UIZHrTGSyVUlGiqQmanZXHKJFeLBoiVO6ZQ6uY9zkTk3/WNEfmRbadjWRXRJWB4SEbBWk9GaeYkUSbbVh9TwsIXA+z0rL9YuyrjK8s2UxkoWtmjuY1rVvI7nyixCUFrAdsjMSE8U3PZJfiRvjSTtmFcNHsdFQypdphV5P6MGf9YupmBlK870yZ0os6NOpsaCwfINVGFoTYAHGyZjoPnZNHGisba7IaxhOt+u7BrXMtSLASKHR7C3M4bw95/G7L36NPai3ZPvKiSILtOk1uxxdCQ39UwY7rlfDFvbeghVduFIcBNkj9TIcVjNU5dkwJrhPgs7QrP95JdSsnRTFCN54zgSxC7Rt+Gk0vG7A0RmGtKCt5yTpg3Vy2+p72kKlaCNPevOVcI60/91Hzk8JWHQ58StJySUSIIvN0QWmrqbbUe5wutQQmmX8LKQXc0r4QLfJXezjhy/jNLwoNvSDcOC/cuViaoGRDqXsq5kHhrFo5s7lB8VE06k8f/Zy3245V4mCbYrv42ZWUZmkWHhA==
+  _WikitudeLicenseKey: T4GsoLau7UH0sZT4mK+IajMu+ULNuTLdSDM2OhX+EZzNdQQidnhsHpqsrESk+yYRr2gvXRaSLDoi0iuwYjPKhHp2h1j5q4537ETkH3rfo0tEh3Zax1YFzcPCx7AdwUQ1nhjy0Yyx+vc0v76NMxRep+YPxNUGnM929zkT+/UUFcZTYWx0ZWRfX4gICDyoRTpU5a7JD3lXVczDTbJrXP3wUMnVhDbgbRh2d4gsQelCyZCB9eBUtNUeUp0RZkuRlNVK7tr4ZAFvBxJvfJ7fR+hSR92gFRosNirROAOJ8Oxy/96/7Unwjg7zU8uyOWQOK7E9ASEnrhpu8xqHanlVJr6/zP1Ro2npyL2ycvFAVbr/RLQ1MiWu5KTT1bMOnUf1kl+CHvFPwX+SLHdNhmV1e4yfU5sHVbBB29j0kcaLJqWWVIaTnKx0VdKBnLZmoEPJgjGy/cWniicxNTRNRQpmxG8XNFYak07a6/7QZsOk34kbTBpFFXevCz2hpJPVlSmq4PvLwj3m2XUvaHbgwrH7qCHHIrbml/2JhaLQuSzVEqCq9h2dTblwOAQRCKjA1W4x+NDZ/CFNPl53LXiU7V4aH0Nt5jd2DOcRbGqAeQxoXKTTPPquUvOAaniUlXXIvFo80nBRp5OAaRwvAdmCLlshp18Xr6JNncPDuRNbuxFa7VAhgedspvRFB4Yemk/V8go5xBEjWmjSalSOM5XhJEfusqs9EA==
   _desiredDeviceResolution: 0
   _desiredDeviceFramerate: 0
   _enableCamera2: 0
@@ -377,8 +410,8 @@ MonoBehaviour:
   OnInputPluginRegistered:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnInputPluginFailure:
     m_PersistentCalls:
       m_Calls: []
@@ -391,6 +424,17 @@ MonoBehaviour:
       Version=7.0.0.0, Culture=neutral, PublicKeyToken=null
   _ignoreTrackableScale: 1
   ActiveOverride: {fileID: 114788456747264248}
+--- !u!114 &114118976432125302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608041738872070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f68df22495d45acaf0575d610bcf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114194837443255964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -431,6 +475,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Wikitude.ImageTrackable+OnImageLostEvent, WikitudeUnityPlugin, Version=7.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114333910273660100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880266931065364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c17f894812dc4a10a9dc6c822535577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114342694385810492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,6 +504,7 @@ MonoBehaviour:
   isSpectator: 0
   nearClipPlane: 0.1
   farClipPlane: 1500
+  defaultScale: 1
   setScaleMultiplier: 100
 --- !u!114 &114419805710817910
 MonoBehaviour:
@@ -567,6 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyVisibleOnHover: 0
+  externalMultiplier: 1
   reticleHoverColor: {r: 0, g: 1, b: 0.13103461, a: 1}
   reticleIdleColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &114483613891790770
@@ -595,6 +652,20 @@ MonoBehaviour:
   ArCam: {fileID: 0}
   headOrientation3DOF: {fileID: 1347666335090296}
   imageTracker: {fileID: 114207574138103364}
+--- !u!114 &114794706844960302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1880266931065364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0efc0bbec8f4ecbb20715b0d0c98c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remoteConnection: {fileID: 114333910273660100}
+  m_jpegQuality: 10
+  m_captureInterval: 2
 --- !u!114 &114867619331307678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -621,6 +692,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -636,6 +708,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -708,6 +781,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!212 &212085670190106466
@@ -719,11 +793,12 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bc393b6ff8ac74d8da189ba452b4c9b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -734,6 +809,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -750,3 +826,5 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

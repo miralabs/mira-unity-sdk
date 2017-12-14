@@ -3,18 +3,19 @@
 --- !u!129 &1
 PlayerSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 13
   productGUID: f70c504b178d54ea79935e84198da747
   AndroidProfiler: 0
+  AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Mira Labs Inc.
-  productName: 2DTransition
+  productName: Mira Example
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -38,8 +39,6 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_SplashScreenBackgroundLandscape: {fileID: 0}
-  m_SplashScreenBackgroundPortrait: {fileID: 0}
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -49,7 +48,6 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
-  m_MobileMTRendering: 0
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
@@ -61,15 +59,18 @@ PlayerSettings:
   allowedAutorotateToPortraitUpsideDown: 0
   allowedAutorotateToLandscapeRight: 0
   allowedAutorotateToLandscapeLeft: 1
-  useOSAutorotation: 1
+  useOSAutorotation: 0
   use32BitDisplayBuffer: 1
   disableDepthAndStencilBuffers: 0
+  androidBlitType: 0
   defaultIsFullScreen: 1
   defaultIsNativeResolution: 1
+  macRetinaSupport: 1
   runInBackground: 0
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
+  Force IOS Speakers When Recording: 0
   submitAnalytics: 1
   usePlayerLog: 1
   bakeCollisionMeshes: 0
@@ -94,6 +95,7 @@ PlayerSettings:
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
   xboxEnablePIXSampling: 0
+  metalFramebufferOnly: 0
   n3dsDisableStereoscopicView: 0
   n3dsEnableSharedListOpt: 1
   n3dsEnableVSync: 0
@@ -101,6 +103,8 @@ PlayerSettings:
   xboxOneResolution: 0
   xboxOneMonoLoggingLevel: 0
   xboxOneLoggingLevel: 1
+  xboxOneDisableEsram: 0
+  xboxOnePresentImmediateThreshold: 0
   videoMemoryForVertexBuffers: 0
   psp2PowerMode: 0
   psp2AcquireBGM: 1
@@ -132,15 +136,22 @@ PlayerSettings:
     daydream:
       depthFormat: 0
       useSustainedPerformanceMode: 0
+      enableVideoLayer: 0
+      useProtectedVideoMemory: 0
     hololens:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
+  m_ColorGamuts: 00000000
+  targetPixelDensity: 0
+  resolutionScalingMode: 0
+  androidSupportedAspectRatio: 1
+  androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: eu.kudan.ar
     Standalone: com.wikitude.unityexample
     Tizen: eu.kudan.ar
-    iOS: com.wikitude.miraexample
+    iOS: com.mirareality.example
     tvOS: eu.kudan.ar
   buildNumber:
     iOS: 0
@@ -208,7 +219,7 @@ PlayerSettings:
   iOSURLSchemes: []
   iOSBackgroundModes: 0
   iOSMetalForceHardShadows: 0
-  metalEditorSupport: 1
+  metalEditorSupport: 0
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 1
   appleDeveloperTeamID: PXD86584BF
@@ -222,7 +233,9 @@ PlayerSettings:
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
+  AndroidEnableTango: 0
   androidEnableBanner: 1
+  androidUseLowAccuracyLocation: 0
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -236,68 +249,84 @@ PlayerSettings:
       m_Icon: {fileID: 0}
       m_Width: 128
       m_Height: 128
+      m_Kind: 0
   - m_BuildTarget: iPhone
     m_Icons:
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 0b9b2b190e75b42c9991bf4144a83e9e, type: 3}
       m_Width: 180
       m_Height: 180
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: c88a5b22e5a8f4c199fd3c81ac55bd03, type: 3}
       m_Width: 167
       m_Height: 167
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 193818f63fd6c40f2aa4438344867447, type: 3}
       m_Width: 152
       m_Height: 152
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 20dd2df98c8cb4070a3d137248a6549a, type: 3}
       m_Width: 144
       m_Height: 144
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: de0ece911b2e745fb92f624d20df81ed, type: 3}
       m_Width: 120
       m_Height: 120
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 8ad5523ca09134e63a4fe9cf3a4b2d12, type: 3}
       m_Width: 114
       m_Height: 114
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: b856e2ddd998a4595b764490ef306243, type: 3}
       m_Width: 76
       m_Height: 76
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 5c7e1008859cc4d99abec53779beb946, type: 3}
       m_Width: 72
       m_Height: 72
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 9e8d305c44677427a8227e4ca80d934c, type: 3}
       m_Width: 57
       m_Height: 57
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 6c7adb4e7eb0f481186fe980cd26d1e3, type: 3}
       m_Width: 120
       m_Height: 120
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 2c77d31cf5d5e40478f9774258438bb6, type: 3}
       m_Width: 80
       m_Height: 80
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 75b7ea59d97d6457095a025ec423619f, type: 3}
       m_Width: 40
       m_Height: 40
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 62624c24bfd5540398a24c35ceb2c024, type: 3}
       m_Width: 87
       m_Height: 87
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: eac0a605fee2641fab670ab257dc515b, type: 3}
       m_Width: 58
       m_Height: 58
+      m_Kind: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 21721d2cdad5541c29aa4f16a4ba358a, type: 3}
       m_Width: 29
       m_Height: 29
+      m_Kind: 0
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1
@@ -307,8 +336,8 @@ PlayerSettings:
     m_APIs: 1000000011000000
     m_Automatic: 1
   - m_BuildTarget: iOSSupport
-    m_APIs: 1000000008000000
-    m_Automatic: 1
+    m_APIs: 08000000
+    m_Automatic: 0
   - m_BuildTarget: AndroidPlayer
     m_APIs: 0b00000008000000
     m_Automatic: 0
@@ -368,10 +397,14 @@ PlayerSettings:
   - m_BuildTarget: tvOS
     m_Enabled: 0
     m_Devices: []
+  m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
-  webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
+  mobileMTRendering:
+    Android: 1
+    iPhone: 1
+    tvOS: 1
   wiiUTitleID: 0005000011000000
   wiiUGroupID: 00010000
   wiiUCommonSaveSize: 4096
@@ -402,6 +435,7 @@ PlayerSettings:
   switchSocketMemoryPoolSize: 6144
   switchSocketAllocatorPoolSize: 128
   switchSocketConcurrencyLimit: 14
+  switchScreenResolutionBehavior: 2
   switchUseCPUProfiler: 0
   switchApplicationID: 0x0005000C10000001
   switchNSODependencies: 
@@ -417,9 +451,6 @@ PlayerSettings:
   switchTitleNames_9: 
   switchTitleNames_10: 
   switchTitleNames_11: 
-  switchTitleNames_12: 
-  switchTitleNames_13: 
-  switchTitleNames_14: 
   switchPublisherNames_0: 
   switchPublisherNames_1: 
   switchPublisherNames_2: 
@@ -432,9 +463,6 @@ PlayerSettings:
   switchPublisherNames_9: 
   switchPublisherNames_10: 
   switchPublisherNames_11: 
-  switchPublisherNames_12: 
-  switchPublisherNames_13: 
-  switchPublisherNames_14: 
   switchIcons_0: {fileID: 0}
   switchIcons_1: {fileID: 0}
   switchIcons_2: {fileID: 0}
@@ -447,9 +475,6 @@ PlayerSettings:
   switchIcons_9: {fileID: 0}
   switchIcons_10: {fileID: 0}
   switchIcons_11: {fileID: 0}
-  switchIcons_12: {fileID: 0}
-  switchIcons_13: {fileID: 0}
-  switchIcons_14: {fileID: 0}
   switchSmallIcons_0: {fileID: 0}
   switchSmallIcons_1: {fileID: 0}
   switchSmallIcons_2: {fileID: 0}
@@ -462,9 +487,6 @@ PlayerSettings:
   switchSmallIcons_9: {fileID: 0}
   switchSmallIcons_10: {fileID: 0}
   switchSmallIcons_11: {fileID: 0}
-  switchSmallIcons_12: {fileID: 0}
-  switchSmallIcons_13: {fileID: 0}
-  switchSmallIcons_14: {fileID: 0}
   switchManualHTML: 
   switchAccessibleURLs: 
   switchLegalInformation: 
@@ -480,7 +502,7 @@ PlayerSettings:
   switchApplicationErrorCodeCategory: 
   switchUserAccountSaveDataSize: 0
   switchUserAccountSaveDataJournalSize: 0
-  switchAttribute: 0
+  switchApplicationAttribute: 0
   switchCardSpecSize: 4
   switchCardSpecClock: 25
   switchRatingsMask: 0
@@ -507,6 +529,18 @@ PlayerSettings:
   switchParentalControl: 0
   switchAllowsScreenshot: 1
   switchDataLossConfirmation: 0
+  switchSupportedNpadStyles: 3
+  switchSocketConfigEnabled: 0
+  switchTcpInitialSendBufferSize: 32
+  switchTcpInitialReceiveBufferSize: 64
+  switchTcpAutoSendBufferSizeMax: 256
+  switchTcpAutoReceiveBufferSizeMax: 256
+  switchUdpSendBufferSize: 9
+  switchUdpReceiveBufferSize: 42
+  switchSocketBufferEfficiency: 4
+  switchSocketInitializeEnabled: 1
+  switchNetworkInterfaceManagerInitializeEnabled: 1
+  switchPlayerConnectionEnabled: 1
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -544,7 +578,6 @@ PlayerSettings:
   ps4GarlicHeapSize: 2048
   ps4ProGarlicHeapSize: 2560
   ps4Passcode: mWqBlQ9wQj99nsQzldVI5ZuGXbEWRK5R
-  ps4UseDebugIl2cppLibs: 0
   ps4pnSessions: 1
   ps4pnPresence: 1
   ps4pnFriends: 1
@@ -619,7 +652,7 @@ PlayerSettings:
   psp2UseLibLocation: 0
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
-  psp2UseDebugIl2cppLibs: 0
+  psp2ScriptOptimizationLevel: 0
   psmSplashimage: {fileID: 0}
   splashScreenBackgroundSourceLandscape: {fileID: 0}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
@@ -637,7 +670,8 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: 
+    1: RadialTimer
+    4: RadialTimer
   platformArchitecture:
     iOS: 2
   scriptingBackend:
@@ -646,6 +680,7 @@ PlayerSettings:
     iOS: 1
   incrementalIl2cppBuild: {}
   additionalIl2CppArgs: 
+  scriptingRuntimeVersion: 0
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
@@ -743,4 +778,5 @@ PlayerSettings:
   projectName: 
   organizationId: 
   cloudEnabled: 0
-  enableNewInputSystem: 0
+  enableNativePlatformBackendsForNewInputSystem: 0
+  disableOldInputManagerSupport: 0

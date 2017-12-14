@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using UnityEditor;
 using UnityEngine;
@@ -37,7 +35,7 @@ public class MenuItems : EditorWindow
     {
         {
             GUILayout.Label("Mira Unity Settings", EditorStyles.boldLabel);
-		GUILayout.Label(m_Logo);
+		    GUILayout.Label(m_Logo);
             // Accelorometer Frequency
 
             GUI.enabled = true;
@@ -54,11 +52,11 @@ public class MenuItems : EditorWindow
             GUI.enabled = true;
             GUILayout.Label("Current Bundle Id" + " = " + PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS));
 
-            if (PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS) == "com.wikitude.miraexample")
+            if (PlayerSettings.GetApplicationIdentifier(BuildTargetGroup.iOS) == "com.mirareality.example")
                 GUI.enabled = false;
 
-            if (GUILayout.Button("Use Recomended (com.wikitude.miraexample)", GUILayout.Width(250)))
-                PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, "com.wikitude.miraexample");
+            if (GUILayout.Button("Use Recomended (com.mirareality.example)", GUILayout.Width(250)))
+                PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, "com.mirareality.example");
 
             GUILayout.Space(5);
 
@@ -74,6 +72,29 @@ public class MenuItems : EditorWindow
             GUILayout.Space(5);
 
             GUI.enabled = true;
+            bool isMetal = false;
+            foreach(UnityEngine.Rendering.GraphicsDeviceType graphicsType in PlayerSettings.GetGraphicsAPIs(BuildTarget.iOS))
+            {
+                if(graphicsType == UnityEngine.Rendering.GraphicsDeviceType.Metal)
+                    isMetal = true;
+            }
+            GUILayout.Label("Graphics APIs contains metal:" + " = " + isMetal);
+            
+            if (isMetal == false)
+                GUI.enabled = false;
+
+            if (GUILayout.Button("Use Recomended (Remove Metal)", GUILayout.Width(250)))
+            {
+                UnityEngine.Rendering.GraphicsDeviceType[] graphicsAPIs = new UnityEngine.Rendering.GraphicsDeviceType[]{UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2};;
+                PlayerSettings.SetGraphicsAPIs(BuildTarget.iOS, graphicsAPIs);
+            }
+    
+            GUILayout.Space(5);
+
+            
+
+
+            GUI.enabled = true;
             GUILayout.Label("UI Orientation" + " = " + PlayerSettings.defaultInterfaceOrientation);
 
             if (PlayerSettings.defaultInterfaceOrientation == UIOrientation.AutoRotation)
@@ -85,13 +106,22 @@ public class MenuItems : EditorWindow
             GUILayout.Space(5);
 
             GUI.enabled = true;
-            GUILayout.Label("Current Auto Rotate to Left ( current" + " = " + PlayerSettings.allowedAutorotateToLandscapeLeft);
+            GUILayout.Label("Configure Mira AutoRotation (Highly Recommended)");
 
-            if (PlayerSettings.allowedAutorotateToLandscapeLeft == true)
+            if (PlayerSettings.allowedAutorotateToLandscapeLeft == true &&
+                PlayerSettings.allowedAutorotateToLandscapeRight == false &&
+                PlayerSettings.allowedAutorotateToPortrait == true &&
+                PlayerSettings.allowedAutorotateToPortraitUpsideDown == false)
                 GUI.enabled = false;
 
             if (GUILayout.Button("Use Recomended (Allow)", GUILayout.Width(250)))
+            {
                 PlayerSettings.allowedAutorotateToLandscapeLeft = true;
+                PlayerSettings.allowedAutorotateToLandscapeRight = false;
+                PlayerSettings.allowedAutorotateToPortrait = true;
+                PlayerSettings.allowedAutorotateToPortraitUpsideDown = false;
+            }
+                
 
             GUILayout.Space(5);
 
@@ -104,19 +134,19 @@ public class MenuItems : EditorWindow
             if (GUILayout.Button("Use Recomended (8.0)", GUILayout.Width(250)))
                 PlayerSettings.iOS.targetOSVersionString = "8.0";
 
-            GUILayout.Space(15);
-            GUI.enabled = true;
-            if (GUILayout.Button("Apply All Recomended Settings", GUILayout.Width(390)))
-            {
-                PlayerSettings.accelerometerFrequency = 60;
-                PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, "com.wikitude.miraexample");
-                PlayerSettings.iOS.cameraUsageDescription = "Computer Vision";
-                PlayerSettings.defaultInterfaceOrientation = UIOrientation.AutoRotation;
-                PlayerSettings.allowedAutorotateToLandscapeLeft = true;
-                PlayerSettings.iOS.targetOSVersionString = "8.0";
-            }
+            // GUILayout.Space(15);
+            // GUI.enabled = true;
+            // if (GUILayout.Button("Apply All Recomended Settings", GUILayout.Width(390)))
+            // {
+            //     PlayerSettings.accelerometerFrequency = 60;
+            //     PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, "com.mirareality.example");
+            //     PlayerSettings.iOS.cameraUsageDescription = "Computer Vision";
+            //     PlayerSettings.defaultInterfaceOrientation = UIOrientation.AutoRotation;
+            //     PlayerSettings.allowedAutorotateToLandscapeLeft = true;
+            //     PlayerSettings.iOS.targetOSVersionString = "8.0";
+            // }
 		GUILayout.Space(15);
-		GUILayout.Label ("Mira SDK 1.0.0.", EditorStyles.boldLabel);
+		GUILayout.Label ("Mira SDK 0.7.0.", EditorStyles.boldLabel);
         }
     }
 

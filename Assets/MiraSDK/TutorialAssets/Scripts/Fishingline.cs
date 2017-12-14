@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using UnityEngine;
 
@@ -44,10 +42,7 @@ namespace Mira
         /// Setting this to a small value can make the fishingline feel like it's underwater
         /// Setting this to a large value will turn the fishinline in to a very inefficient laser pointer.!-- Don't do this
         /// </summary>
-        float lerpSpeedMult = 10;
-
-        [SerializeField]
-        private float segmentDelayAmt = 10f;
+        float lerpSpeedMult = 1;
 
         private Transform fishinglineParent;
 
@@ -79,8 +74,8 @@ namespace Mira
             lineRend = GetComponent<LineRenderer>();
 
             // Set to Scene Scale
-            lineRend.startWidth *= (1 / MiraArController.scaleMultiplier);
-            lineRend.endWidth *= (1 / MiraArController.scaleMultiplier);
+            // lineRend.startWidth *= (1 / MiraArController.scaleMultiplier);
+            // lineRend.endWidth *= (1 / MiraArController.scaleMultiplier);
 
             CreateSegments();
             CreateRefPoints();
@@ -98,14 +93,14 @@ namespace Mira
             for (int i = 0; i < numSegments; i++)
             {
                 Transform segment = new GameObject("Segment").transform;
-                segment.SetParent(transform);
+                segment.SetParent(null);
                 segment.localPosition = new Vector3(0, 0, segmentLength * i);
                 currentSegments[i] = segment;
                 if (fishinglineParent == null)
                 {
                     segment.SetParent(null);
                 }
-                segment.SetParent(fishinglineParent);
+                segment.SetParent(null);
 
                 if (colliders == true)
                 {
@@ -195,7 +190,7 @@ namespace Mira
             for (int i = 1; i <= numSegments; i++)
             {
                 // Starting the for loop at the last (furthest) item, and ending at the closest
-                SegmentLerp(currentSegments[numSegments - i], referencePoints[numSegments - i], lerpSpeedMult * (segmentDelayAmt * i));
+                SegmentLerp(currentSegments[numSegments - i], referencePoints[numSegments - i], lerpSpeedMult * i);
             }
         }
 

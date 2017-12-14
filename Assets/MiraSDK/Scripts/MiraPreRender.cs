@@ -1,6 +1,5 @@
-﻿// Copyright 2016 Google Inc. All rights reserved.
-//
-// MODIFIED BY MIRA LABS, INC.
+﻿// Original work: Copyright 2016 Google Inc. All rights reserved.
+// Modified work: Copyright 2017 Mira Labs, Inc. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.

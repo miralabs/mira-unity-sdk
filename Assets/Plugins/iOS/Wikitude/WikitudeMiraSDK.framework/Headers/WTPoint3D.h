@@ -7,9 +7,9 @@
 //
 
 struct WTPoint3D{
-    CGFloat x;
-    CGFloat y;
-    CGFloat z;
+    float x;
+    float y;
+    float z;
 };
 
 typedef struct WTPoint3D WTPoint3D;

@@ -4,19 +4,17 @@
 
 This project contains Mira's Unity-based SDK for developing with the Mira Prism.
 
-All scripts under MiraSDK/Scripts should not be edited.
+* All scripts under [`Assets/MiraSDK/Scripts/`](Assets/MiraSDK/Scripts/) shouldn't be edited, but if you've found an error, or would like to suggest improvements, please submit a GitHub issue or pull request.
+* All scripts under [`Assets/MiraSDK/Scenes/Tutorials/`](Assets/MiraSDK/Scenes/Tutorials/) are for educational purposes and can be edited or removed.
 
-All scripts under Demo or TutorialAssets are for demo purposes and can be edited or removed.
+## Getting Started
+For optimal and efficient use of the SDK please visit our [developer portal](https://developer.mirareality.com/docs/getting-started/) for Documentation, FAQs, best practices, and the changelog.
 
-For optimal and efficient use of SDK please follow our guidelines in the documentation.
-
-We recommend trying out our Demos, Mira 101 to 104, before starting development.
-
-Please visit our [developer portal](https://developer.mirareality.com/docs/getting-started/) for Documentation and Support.
+We recommend trying out our Demos, and Mira Tutorials 101 to 104, before starting development.
 
 The latest version of the SDK can be found [on our GitHub repo](https://github.com/miralabs/mira-unity-sdk).
 
 For more information and products, visit our website at https://www.mirareality.com.
 
 # License
-See LICENSE.md
+See [`LICENSE.md`](LICENSE.md)

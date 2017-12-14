@@ -1,23 +1,22 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using Mira;
 using System.Collections;
 using UnityEngine;
 using Wikitude;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.iOS;
 
 /// <summary>
 /// All Mira settings for Wikitude Tracking, including positional offsets, tracking scaling, and image preview scaling
@@ -51,7 +50,10 @@ public class MiraWikitudeManager : TransformOverride
     private static MiraWikitudeManager instance = null;
     private float scaleMultiplier;
     private Quaternion rotationalOffset;
-    public Vector3 positionalOffset;
+    private Vector3 positionalOffset;
+
+    private RotationalTrackingManager rotationalTracking;
+    
     private bool flag = false;
 
     #endregion PrivateVariables
@@ -85,30 +87,34 @@ public class MiraWikitudeManager : TransformOverride
 	}
     public void Awake()
     {
-        ArCam = gameObject.GetComponent<WikitudeCamera>();
-        //	Instance.InstantiateWikitudeCamera ();
-        InstaiateRotationalHandoffManager();
+        
+        
     }
 
     public void Start()
     {
         scaleMultiplier = 1 / MiraArController.scaleMultiplier;
-        rotationalOffset = Quaternion.Euler(-30, 0, 0);
-        // positionalOffset = new Vector3(-5.2f, -0.93599f, -5.0f) * scaleMultiplier;
-        positionalOffset = new Vector3(-6.006f, -2.846f, -3.689f) * scaleMultiplier;
+        ArCam = gameObject.GetComponent<WikitudeCamera>();
 
         if (MiraArController.Instance.isSpectator == false)
         {
+            ArCam.DevicePosition = CaptureDevicePosition.Front;
             Debug.Log("Using front facing camera");
             Vector2 exposurepoint = new Vector2(0.15f, 0.2f);
             ArCam.ExposeAtPointOfInterest(exposurepoint, CaptureExposureMode.ContinuousAutoExpose);
-            ArCam.DevicePosition = CaptureDevicePosition.Front;
+
+            rotationalOffset = Quaternion.Euler(-30, 0, 0);
+            // positionalOffset = new Vector3(-5.2f, -0.93599f, -5.0f) * scaleMultiplier;
+            positionalOffset = new Vector3(-6.006f, -2.846f, -3.689f) * scaleMultiplier;
+            
         }
         else
         {
-		Camera specCam = gameObject.AddComponent<Camera> ();
-		specCam.nearClipPlane = MiraArController.Instance.nearClipPlane * (1/MiraArController.Instance.setScaleMultiplier);
+		    Camera specCam = gameObject.AddComponent<Camera> ();
+
             ArCam.DevicePosition = CaptureDevicePosition.Back;
+		    specCam.nearClipPlane = MiraArController.Instance.nearClipPlane * (1/MiraArController.scaleMultiplier);
+            
             //ArCam.EnableCameraRendering = true;
             positionalOffset = Vector3.zero;
             rotationalOffset = Quaternion.identity;
@@ -116,14 +122,21 @@ public class MiraWikitudeManager : TransformOverride
 
             imageTracker.AutoToggleVisibility = true;
         }
+        
+    
+        
+        InstaiateRotationalHandoffManager();
+    
+
 
         SanityCheck();
     }
 
     public void Update()
     {
-	if(!gameObject.GetComponent<WikitudeCamera> ().EnableCameraRendering && MiraArController.Instance.isSpectator)
-	gameObject.GetComponent<WikitudeCamera> ().EnableCameraRendering = true;
+	    if(!gameObject.GetComponent<WikitudeCamera> ().EnableCameraRendering && MiraArController.Instance.isSpectator)
+	        gameObject.GetComponent<WikitudeCamera> ().EnableCameraRendering = true;
+
 	
     }
 
@@ -132,13 +145,13 @@ public class MiraWikitudeManager : TransformOverride
     #region Public Methods
 
     /// <summary>
-    /// Instaiates the rotational handoff manager required for state changes from Tracking founf -> Tracking Loast and vice versa.
+    /// /// Instaiates the rotational handoff manager required for state changes from Tracking founf -> Tracking Loast and vice versa.
     /// </summary>
     public void InstaiateRotationalHandoffManager()
     {
 	if (headOrientation3DOF != null) {
             headOrientation3DOF.AddComponent<InverseGyroController>();
-            headOrientation3DOF.AddComponent<RotationalTrackingManager>();
+            rotationalTracking = headOrientation3DOF.AddComponent<RotationalTrackingManager>();
         }
         else
         {
@@ -176,13 +189,44 @@ public class MiraWikitudeManager : TransformOverride
     /// <param name="position">Mira Ar Camera  Position.</param>
     /// <param name="rotation">Mira Ar Camera Rotation.</param>
     /// <param name="scale">Mira Ar Camera Scale.</param>
+
+// Mira Remote Code
+#if UNITY_EDITOR
+
+    float remoteTargetHeight;
+    public void RemoteTrackingFound(float foundTargetHeight)
+    {
+        remoteTargetHeight = foundTargetHeight;
+        // Simulate tracking found event (rotational handoff disabled)
+        rotationalTracking.RemoteTrackingEvents(true);
+    }
+
+    public void RemoteTrackingLost()
+    {
+         // Simulate tracking lost event (rotational handoff enabled)
+        rotationalTracking.RemoteTrackingEvents(false);
+    }
+
+
+    public void MiraRemoteTracking(Vector3 camPosition, Quaternion camRotation)
+    {
+        
+        transform.position = (remoteTargetHeight * scaleMultiplier * camPosition * 0.1f) + camRotation * positionalOffset;
+        transform.rotation = camRotation * rotationalOffset;
+       
+    
+    }
+#endif
+    
     public override void CameraOverride(Trackable trackable, Transform camera, RecognizedTarget target, ref Vector3 position, ref Quaternion rotation, ref Vector3 scale)
     {
         var imageTarget = target as ImageTarget;
         if (imageTarget != null)
         {
-            // Debug.Log("Position:" + position +", Cam Position: " + camera.position);
-            position = imageTarget.PhysicalTargetHeight * scaleMultiplier * position * 0.1f + rotation * positionalOffset;
+            // position = imageTarget.PhysicalTargetHeight * scaleMultiplier * position * 0.1f + rotation * positionalOffset;
+            // rotation = rotation * rotationalOffset;
+            Vector3 relativePosition = position - trackable.transform.position;
+            position = trackable.transform.position + imageTarget.PhysicalTargetHeight * scaleMultiplier * relativePosition * 0.1f + rotation * positionalOffset;
             rotation = rotation * rotationalOffset;
         }
     }

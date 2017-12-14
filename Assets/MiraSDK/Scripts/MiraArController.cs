@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
+
 using UnityEngine;
 
 namespace Mira
@@ -68,15 +67,21 @@ namespace Mira
         public float farClipPlane = 1500f;
 
         /// <summary>
+        /// Is the scene in meter scale?
+        /// </summary>
+        public bool defaultScale = true;
+
+        /// <summary>
         /// Default scale is in cm. To go up to meter scale, set scaleMultiplier to 100.
         /// </summary>
-        public float setScaleMultiplier = 100f;
+        [SerializeField]
+        public float setScaleMultiplier;
 
         /// <summary>
         /// The scale multiplier scales the entire Mira System, so that it's easy to port physics or animation heavy games
         /// If you are creating a new game, we recoomend that you keep the scaleMultiplier at 100 (meterscale)
         /// </summary>
-        public static float scaleMultiplier = 100f;
+        public static float scaleMultiplier = 100;
 
         #endregion Public Variables
 
@@ -108,21 +113,90 @@ namespace Mira
 
         #region Unity callbacks
 
+
+        // Controls the Settings Button
+        Texture btnTexture;
+
+        float buttonHeight = 100;
+        float buttonWidth = 100;
+
+        GUISkin MiraGuiSkin;
+
+        UnityEngine.EventSystems.MiraInputModule miraInputModule;
+
+        bool GUIEnabled = true;
+
+        private GameObject settingsMenu;
+
+        void OnGUI()
+        {
+            if(GUIEnabled)
+            {
+                GUI.skin = MiraGuiSkin;
+                if(GUI.Button (new Rect(Screen.width/2 - buttonWidth/2, 0, buttonWidth, buttonHeight), btnTexture))
+                {   
+                    Debug.Log("Settings Menu Enabled");
+                    ToggleSettingsMenu(true);
+                }
+
+            }
+        
+        }
+
+        public void ToggleSettingsMenu(bool enable)
+        {
+            // settingsMenu.SetActive(enable);
+            if(enable)
+                settingsMenu.GetComponent<SettingsManager>().OpenMainMenu();
+            // else
+            //     settingsMenu.GetComponent<SettingsManager>().SettingsMenuClose();
+            if(miraInputModule != null)
+                miraInputModule.enabled = !enable;
+            GUIEnabled = !enable;
+        }
+
+        void SetupSettingsMenu()
+        {
+            settingsMenu = Instantiate((GameObject)Resources.Load("SettingsMenuCanvas", typeof(GameObject)));
+            // settingsMenu.SetActive(false);
+            // ToggleSettingsMenu(false);
+            MiraGuiSkin = (GUISkin)Resources.Load("MiraGuiSkin", typeof(GUISkin));
+            btnTexture = (Texture)Resources.Load("SettingsIcon", typeof(Texture));
+
+            // Find instances of MiraInputModule
+            UnityEngine.EventSystems.MiraInputModule[] miraInputModules = FindObjectsOfType<UnityEngine.EventSystems.MiraInputModule>();
+            // Make sure there's only one Mira Input Module, otherwise settings menu will break
+            if(miraInputModules.Length > 0)
+            {
+                if(miraInputModules[0].enabled == true)
+                    miraInputModule = miraInputModules[0];
+            }
+            if(miraInputModules.Length > 1)
+            {
+                for(int i=1; i<miraInputModules.Length; i++)
+                {  
+                    if(miraInputModule == null && miraInputModules[i].enabled == true)
+                        miraInputModule = miraInputModules[i];
+                    miraInputModules[i].enabled = false;
+                }
+            }
+            
+        }
+
         public void Awake()
         {
+            if(isSpectator == false)
+                DeviceOrientation();
             cameraRig = gameObject;
             scaleMultiplier = setScaleMultiplier;
             Instance.InitializeARController();
+            
+            SetupSettingsMenu();
+
         }
 
         private void Start()
         {
-            // For screen orientation
-            Screen.autorotateToPortrait = true;
-            Screen.autorotateToLandscapeLeft = true;
-            Screen.autorotateToPortraitUpsideDown = false;
-            Screen.autorotateToLandscapeRight = false;
-            Screen.orientation = ScreenOrientation.AutoRotation;
 
             // Force screen brightness
 #if UNITY_IOS
@@ -130,6 +204,18 @@ namespace Mira
 #endif
 
             SanityCheck();
+        }
+
+        void DeviceOrientation()
+        {
+
+            // For screen orientation
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+            // Screen.autorotateToPortrait = false;
+            // Screen.autorotateToLandscapeLeft = true;
+            // Screen.autorotateToPortraitUpsideDown = false;
+            // Screen.autorotateToLandscapeRight = false;
         }
 
         #endregion Unity callbacks

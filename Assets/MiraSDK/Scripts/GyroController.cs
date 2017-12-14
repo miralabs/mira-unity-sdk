@@ -1,4 +1,20 @@
-﻿using UnityEngine;
+﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
+//
+// This SDK may only be used in connection with the development of
+// applications that are exclusively created for, and exclusively available
+// for use with, MIRA hardware devices. This SDK may only be commercialized
+// in the U.S. and Canada, subject to the terms of the License.
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.XR.iOS;
 
 /// <summary>
 /// Accesses the phone's gyroscope data
@@ -36,16 +52,12 @@ public class GyroController : MonoBehaviour
     /// </summary>
     public float lowPassFilterFactor = 1f;
 
-    private readonly Quaternion baseIdentity = Quaternion.Euler(90, 0, 0);
-    private readonly Quaternion landscapeRight = Quaternion.Euler(0, 0, 90);
-    private readonly Quaternion landscapeLeft = Quaternion.Euler(0, 0, -90);
-    private readonly Quaternion upsideDown = Quaternion.Euler(0, 0, 180);
+
     private readonly Quaternion frontCamera = Quaternion.AngleAxis(180, Vector3.up);
 
     private Quaternion cameraBase = Quaternion.identity;
     private Quaternion calibration = Quaternion.identity;
     private Quaternion baseOrientation = Quaternion.Euler(90, 0, 0);
-    private Quaternion baseOrientationRotationFix = Quaternion.identity;
 
     private Quaternion referenceRotation = Quaternion.identity;
 
@@ -61,6 +73,8 @@ public class GyroController : MonoBehaviour
     /// </summary>
     public bool useFrontCamera = true;
 
+    bool miraRemoteMode = false;
+
     private Quaternion rotationOffset;
 
     // private MiraRemoteClient remote;
@@ -74,14 +88,28 @@ public class GyroController : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
+    public void MiraRemoteActive()
+    {
+        miraRemoteMode = true;
+    }
+
     protected Quaternion GetAttitude()
     {
-#if UNITY_EDITOR
 
-        return Input.gyro.attitude;
+        // if(miraRemoteMode)
+        //     return MiraLivePreviewEditor.Instance.attitude;
+        // else
+        //     return Input.gyro.attitude;
+
+#if UNITY_EDITOR
+        if(miraRemoteMode)
+            return MiraLivePreviewEditor.Instance.attitude;
+        else
+            return Input.gyro.attitude;
 #else
         return Input.gyro.attitude;
 #endif
+            
     }
 
     protected void Start()
@@ -94,8 +122,7 @@ public class GyroController : MonoBehaviour
     protected void LateUpdate()
     {
 #if UNITY_EDITOR
-        if (UnityEditor.EditorApplication.isRemoteConnected == false)
-
+        if (miraRemoteMode == false)
             gyroEnabled = false;
         else
             gyroEnabled = true;
@@ -105,7 +132,7 @@ public class GyroController : MonoBehaviour
         if (inverseGyroSetup)
         {
             gyroRotation = Quaternion.Slerp(gyroRotation,
-                cameraBase * (ConvertRotation(referenceRotation * GetAttitude()) * GetRotFix()) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset, lowPassFilterFactor);
+                cameraBase * (ConvertRotation(referenceRotation * GetAttitude())) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset, lowPassFilterFactor);
         }
     }
 
@@ -115,11 +142,12 @@ public class GyroController : MonoBehaviour
             return;
 
         GUILayout.Label("Orientation: " + Screen.orientation);
+        GUILayout.Label("Device Orientation: " + Input.deviceOrientation);
         GUILayout.Label("Calibration: " + calibration);
         GUILayout.Label("Camera base: " + cameraBase);
         GUILayout.Label("input.gyro.attitude: " + GetAttitude());
-        GUILayout.Label("transform.rotation: " + transform.rotation);
-        GUILayout.Label("front-facing: " + useFrontCamera);
+        // GUILayout.Label("transform.rotation: " + transform.rotation);
+        // GUILayout.Label("front-facing: " + useFrontCamera);
 
         if (GUILayout.Button("On/off gyro: " + Input.gyro.enabled, GUILayout.Height(100)))
         {
@@ -143,11 +171,7 @@ public class GyroController : MonoBehaviour
             UpdateCalibration(true);
         }
 
-        if (GUILayout.Button("Reset base orientation", GUILayout.Height(80)))
-        {
-            ResetBaseOrientation();
-        }
-
+  
         if (GUILayout.Button("Reset camera rotation", GUILayout.Height(80)))
         {
             Recenter(true);
@@ -179,11 +203,23 @@ public class GyroController : MonoBehaviour
     public void AttachGyro()
     {
         gyroEnabled = true;
-        ResetBaseOrientation();
         UpdateCalibration(true);
         UpdateCameraBaseRotation(true);
         RecalculateReferenceRotation();
+        // StartCoroutine(AttachDatGyro());
+        
     }
+
+    // private IEnumerator AttachDatGyro()
+    // {
+    //     yield return null;
+    //     gyroEnabled = true;
+    //     UpdateCalibration(true);
+    //     UpdateCameraBaseRotation(true);
+    //     RecalculateReferenceRotation();
+    //     yield return null;
+    //     Recenter(true);
+    // }
 
     /// <summary>
     /// Detaches gyro controller from the transform
@@ -196,6 +232,37 @@ public class GyroController : MonoBehaviour
     #endregion [Public methods]
 
     #region [Private methods]
+
+    // Transform cube1;
+    // Transform cube2;
+    // Transform cube3;
+    // void Update()
+    // {
+    //     if(cube1 == null)
+    //     {
+    //         cube1 = GameObject.CreatePrimitive(PrimitiveType.Capsule).transform;
+    //         cube1.localScale *= 0.01f;
+            
+    //     }
+    //     if(cube2 == null)
+    //     {
+    //         cube2 = GameObject.CreatePrimitive(PrimitiveType.Capsule).transform;
+    //         cube2.localScale *= 0.01f;
+            
+    //     }
+    //     if(cube3 == null)
+    //     {
+    //         cube3 = GameObject.CreatePrimitive(PrimitiveType.Capsule).transform;
+    //         cube3.localScale *= 0.01f;
+            
+    //     }
+    //     cube1.rotation = cameraBase;
+    //     cube2.rotation = calibration;
+    //     cube3.rotation = referenceRotation;
+
+    // }
+
+    
 
     /// <summary>
     /// Update the gyro calibration.
@@ -212,7 +279,7 @@ public class GyroController : MonoBehaviour
             }
             else
             {
-                calibration = (Quaternion.FromToRotation(baseOrientationRotationFix * Vector3.up, fw));
+                calibration = (Quaternion.FromToRotation(Quaternion.identity * Vector3.up, fw));
             }
         }
         else
@@ -240,7 +307,7 @@ public class GyroController : MonoBehaviour
                 var fw = gyroRotation * Vector3.forward;
                 fw.y = 0;
                 gyroRotation =
-                     (ConvertRotation(referenceRotation * GetAttitude()) * GetRotFix()) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset;
+                     (ConvertRotation(referenceRotation * GetAttitude()) * Quaternion.identity) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset;
                 cameraBase = Quaternion.FromToRotation(Vector3.forward, fw);
             }
         }
@@ -251,6 +318,14 @@ public class GyroController : MonoBehaviour
     }
 
     /// <summary>
+    /// Recalculates reference rotation.
+    /// </summary>
+    private void RecalculateReferenceRotation()
+    {
+        referenceRotation = Quaternion.Inverse(baseOrientation) * Quaternion.Inverse(calibration);
+    }
+
+    /// <summary>
     /// Recenter the camera's orientation
     /// </summary>
     /// <param name='onlyHorizontal'>
@@ -258,12 +333,13 @@ public class GyroController : MonoBehaviour
     /// </param>
     public void Recenter(bool onlyHorizontal)
     {
+        UpdateCalibration(true);
         if (onlyHorizontal)
         {
             Quaternion previousRotation = gyroRotation;
 
             Quaternion pureGyroRotation =
-                    (ConvertRotation(referenceRotation * GetAttitude()) * GetRotFix()) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset;
+                    (ConvertRotation(referenceRotation * GetAttitude()) * Quaternion.identity) * (useFrontCamera ? frontCamera : Quaternion.identity) * rotationOffset;
             Vector3 fw = pureGyroRotation * Vector3.forward;
             fw.y = 0;
             if (fw == Vector3.zero)
@@ -298,50 +374,9 @@ public class GyroController : MonoBehaviour
         return new Quaternion(q.x, q.y, -q.z, -q.w);
     }
 
-    /// <summary>
-    /// Gets the rot fix for different orientations.
-    /// </summary>
-    /// <returns>
-    /// The rot fix.
-    /// </returns>
-    private Quaternion GetRotFix()
-    {
-#if UNITY_3_5
-    if (Screen.orientation == ScreenOrientation.Portrait)
-        return Quaternion.identity;
 
-    if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.Landscape)
-        return landscapeLeft;
 
-    if (Screen.orientation == ScreenOrientation.LandscapeRight)
-        return landscapeRight;
-
-    if (Screen.orientation == ScreenOrientation.PortraitUpsideDown)
-        return upsideDown;
-
-    return Quaternion.identity;
-#else
-        return Quaternion.identity;
-
-#endif
-    }
-
-    /// <summary>
-    /// Recalculates reference system.
-    /// </summary>
-    private void ResetBaseOrientation()
-    {
-        baseOrientationRotationFix = GetRotFix();
-        baseOrientation = baseOrientationRotationFix * baseIdentity;
-    }
-
-    /// <summary>
-    /// Recalculates reference rotation.
-    /// </summary>
-    private void RecalculateReferenceRotation()
-    {
-        referenceRotation = Quaternion.Inverse(baseOrientation) * Quaternion.Inverse(calibration);
-    }
+    
 
     #endregion [Private methods]
 }

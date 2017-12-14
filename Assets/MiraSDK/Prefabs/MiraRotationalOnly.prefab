@@ -97,6 +97,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1945490353616194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4983634895385138}
+  - component: {fileID: 114881204787512304}
+  - component: {fileID: 114496769564564890}
+  m_Layer: 0
+  m_Name: MiraLivePreview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1957754465341370
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4545639204231652}
   - component: {fileID: 114029402959969886}
+  - component: {fileID: 114031421305494794}
   m_Layer: 0
   m_Name: BTController
   m_TagString: Untagged
@@ -124,7 +142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4610667535068772}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4341281814481322
 Transform:
@@ -137,7 +155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4610667535068772}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4495097478572274
 Transform:
@@ -178,7 +196,7 @@ Transform:
   - {fileID: 4545593882482282}
   - {fileID: 4495097478572274}
   m_Father: {fileID: 4610667535068772}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4610667535068772
 Transform:
@@ -190,10 +208,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4983634895385138}
   - {fileID: 4341281814481322}
   - {fileID: 4545639204231652}
   - {fileID: 4286825852201920}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4983634895385138
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945490353616194}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4610667535068772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33526428701340116
@@ -227,7 +259,21 @@ MonoBehaviour:
   armOffsetX: 10
   armOffsetY: -40
   armOffsetZ: 40
-  angleTilt: 5
+  angleTiltX: 15
+  angleTiltY: -5
+  ControllerConnected: 0
+  DebuCheck: 0
+--- !u!114 &114031421305494794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957754465341370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f68df22495d45acaf0575d610bcf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114175642981175718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +304,20 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &114496769564564890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945490353616194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0efc0bbec8f4ecbb20715b0d0c98c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  remoteConnection: {fileID: 114881204787512304}
+  m_jpegQuality: 10
+  m_captureInterval: 2
 --- !u!114 &114651555891531284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +347,7 @@ MonoBehaviour:
   isSpectator: 0
   nearClipPlane: 0.1
   farClipPlane: 1500
+  defaultScale: 1
   setScaleMultiplier: 100
 --- !u!114 &114795165036390750
 MonoBehaviour:
@@ -319,6 +380,17 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
+--- !u!114 &114881204787512304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945490353616194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c17f894812dc4a10a9dc6c822535577, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114962141064402662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlyVisibleOnHover: 0
+  externalMultiplier: 1
   reticleHoverColor: {r: 0, g: 1, b: 0.13103461, a: 1}
   reticleIdleColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!120 &120181362937687888
@@ -342,6 +415,7 @@ LineRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -357,6 +431,7 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -429,6 +504,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!212 &212093204605331588
@@ -440,11 +516,12 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bc393b6ff8ac74d8da189ba452b4c9b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -455,6 +532,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -471,3 +549,5 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

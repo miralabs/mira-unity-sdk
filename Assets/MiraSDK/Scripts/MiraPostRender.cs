@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using UnityEngine;
 
@@ -130,12 +128,12 @@ namespace Mira
             float defaultParallaxDist = 0.6096f;
             // For maximum convergence at infinity:
             float offsetAngle = 90 - Mathf.Atan(defaultParallaxDist / (IPD * 0.5f * 0.001f)) * Mathf.Rad2Deg;
-            Debug.Log("Offset Angle: " + offsetAngle);
+            // Debug.Log("Offset Angle: " + offsetAngle);
 
             // For a custom maximum convergence planes:
             float convergenceAngle = 90 - Mathf.Atan(desiredParallaxDist / (IPD * 0.5f * 0.001f)) * Mathf.Rad2Deg;
             float hybridAngle = offsetAngle - convergenceAngle;
-            Debug.Log("Hybrid Angle: " + hybridAngle);
+            // Debug.Log("Hybrid Angle: " + hybridAngle);
 
             ParallaxShift = hybridAngle;
         }

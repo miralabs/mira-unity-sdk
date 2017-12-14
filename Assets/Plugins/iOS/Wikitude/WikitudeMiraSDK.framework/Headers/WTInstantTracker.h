@@ -14,6 +14,8 @@
 
 #import "WTBaseTracker.h"
 #import "WTInstantTrackingCoordinateConversionHandler.h"
+#import "WTInstantTrackingPointCloudDataProvider.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -140,7 +142,7 @@ typedef NS_ENUM(NSInteger, WTInstantTrackingState) {
 /**
  * @brief use this method to perform a hit test on the point cloud coming from the instant tracker.
  *
- * When invocing this method, a block on the given operation queue is dispatched which performs the hit test operation.
+ * When invoking this method, a block on the given operation queue is dispatched which performs the hit test operation.
  * In case there is no point at the given screen coordinate, the BOOL property in the completion handler is set to NO. Otherwise the given 3d coordinate can be used to position an augmentation at this point.
  *
  * @param screenCoordinate The screen coordinate for that a hit test should be performed
@@ -148,6 +150,16 @@ typedef NS_ENUM(NSInteger, WTInstantTrackingState) {
  * @param completionHandler The block that should be called when the hit test computation finishes
  */
 - (void)convertScreenCoordinate:(CGPoint)screenCoordinate toPointCloudCoordinateOnQueue:(NSOperationQueue *)operationQueue completion:(WTInstantTrackingCoordinateConversionHandler)completionHandler;
+
+/**
+ * @brief use this method to get all points of the current point cloud that is managed by this instant tracker
+ *
+ * When invoking this method, a block on the given operation queue is dispatched which performs the point cloud retrieval.
+ *
+ * @param operationQueue The operation queue on which the point cloud retrieval is performed
+ * @param dataProvider The data provider that should be used to provide the current point cloud.
+ */
+- (void)requestCurrentPointCloudOnQueue:(NSOperationQueue *)operationQueue representedThroughDataProvider:(WTInstantTrackingPointCloudDataProvider *)dataProvider;
 
 @end
 

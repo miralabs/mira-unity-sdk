@@ -5,15 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/MiraSDK/TemplateScenes/WikiMiraTemplate.unity
+  - enabled: 0
+    path: Assets/MiraSDK/Scenes/WikiMiraTemplate.unity
     guid: 9999059dddb554e0c811540d1c6b56de
   - enabled: 0
-    path: Assets/MiraSDK/TemplateScenes/RotationalMiraTemplate.unity
+    path: Assets/MiraSDK/Scenes/RotationalMiraTemplate.unity
     guid: 1d4f6f9a83e18416c807d74534e80fac
   - enabled: 0
-    path: Assets/MiraSDK/TemplateScenes/2DTransition.unity
+    path: Assets/MiraSDK/Scenes/2DTransition.unity
     guid: 34485055cb71b4d5287d9447cdbe64ce
   - enabled: 0
-    path: Assets/MiraSDK/TemplateScenes/SpectatorTemplate.unity
+    path: Assets/MiraSDK/Scenes/SpectatorTemplate.unity
     guid: 7196e9f90aa4a4679afe4d9c51b8ce95
+  - enabled: 0
+    path: Assets/MiraSDK/Scenes/MiraLivePreviewApp.unity
+    guid: d0f71a3c2aec64cf2b4370b9d7434771
+  - enabled: 0
+    path: Assets/MiraSDK/Scenes/Tutorials/102_ControllerInteractions.unity
+    guid: 73b843499980d493ea21ac1ba80a5153
+  - enabled: 1
+    path: Assets/MiraSDK/Scenes/Tutorials/104_SpectatorModeTutorial.unity
+    guid: d77d3379bf5bb4bd9bd12cace1991537

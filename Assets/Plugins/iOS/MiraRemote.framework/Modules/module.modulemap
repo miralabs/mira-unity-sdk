@@ -1,0 +1,6 @@
+framework module MiraRemote {
+  umbrella header "MiraRemote.h"
+
+  export *
+  module * { export * }
+}

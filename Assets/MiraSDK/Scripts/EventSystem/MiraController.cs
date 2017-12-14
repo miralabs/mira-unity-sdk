@@ -1,14 +1,33 @@
-﻿using Mira;
+﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
+//
+// This SDK may only be used in connection with the development of
+// applications that are exclusively created for, and exclusively available
+// for use with, MIRA hardware devices. This SDK may only be commercialized
+// in the U.S. and Canada, subject to the terms of the License.
+
+using Mira;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Mira;
+using UnityEngine.XR.iOS;
 
 /// <summary>
 /// MiraController provides the controller's current state including button input and orientation
 /// </summary>
 public class MiraController : MonoBehaviour
 {
+	#if UNITY_EDITOR
+	private MiraLivePreviewEditor _mrc;
+	#endif
     // static singleton property
     private static MiraController _instance;
 
@@ -28,7 +47,7 @@ public class MiraController : MonoBehaviour
         }
     }
 
-    private void validateInstance()
+    private void ValidateInstance()
     {
         if (_instance != null && _instance != this)
         {
@@ -46,7 +65,8 @@ public class MiraController : MonoBehaviour
     /// </summary>
     public enum ControllerType
     {
-        XImmerse = 0
+        PrismRemote = 0,
+        MiraVirtual = 1,
     }
 
     public enum Handedness
@@ -77,7 +97,9 @@ public class MiraController : MonoBehaviour
     /// </summary>
     public ClickChoices WhatButtonIsClick;
 
-    private static MiraUserInput _userInput;
+    public MiraBTRemoteInput userInput {get {return _userInput; } }
+
+    private static MiraBTRemoteInput _userInput;
 
     /// <summary>
     /// The stereo camera rig.
@@ -130,26 +152,39 @@ public class MiraController : MonoBehaviour
     /// </summary>
     private Vector3 offsetPos;
 
-    private Transform shoulderRefPt;
-
     private bool isRotationalMode = false;
 
     [SerializeField]
-    private float angleTilt = -15;
+    private float angleTiltX = 15;
+    [SerializeField]
+    private float angleTiltY = -5;
 
+    private GameObject returnToHome;
+
+    private Image radialTimer;
+
+
+    void OnEnable()
+    {
+        RemoteManager.Instance.OnRemoteConnected += RemoteConnected;
+		RemoteManager.Instance.OnRemoteDisconnected += RemoteDisconnected;
+    }
+    void OnDisable()
+    {
+        RemoteManager.Instance.OnRemoteConnected -= RemoteConnected;
+		RemoteManager.Instance.OnRemoteDisconnected -= RemoteDisconnected;
+    }
     private void Awake()
     {
-        validateInstance();
-        assignController();
-        assignClickFunctionality();
+        ValidateInstance();
+        controllerType = ControllerType.PrismRemote;
+        _userInput = new MiraBTRemoteInput();
+
     }
 
-    private void assignController()
+    public void assignController()
     {
-        if (controllerType == ControllerType.XImmerse)
-        {
-            _userInput = new MiraXImmerseInput();
-        }
+		
         if (_userInput.init() != true)
         {
             Debug.Log("controller setup failed");
@@ -158,9 +193,12 @@ public class MiraController : MonoBehaviour
 
     private void Start()
     {
-        // Reference to main camera transform
+        
+        Debug.Log("Creating Bluetooth Remote Input");	
+        assignClickFunctionality();		
+
         cameraRig = MiraArController.Instance.cameraRig.transform;
-        // Rotational tracking transform
+          // Rotational tracking transform
         if (MiraArController.Instance.isRotationalOnly == false)
         {
             rotationalTracking = MiraWikitudeManager.Instance.headOrientation3DOF.transform;
@@ -171,6 +209,12 @@ public class MiraController : MonoBehaviour
         {
             isRotationalMode = true;
         }
+
+        StartCoroutine(StartController());
+    }
+    private IEnumerator StartController()
+    {
+        
 
         sceneScaleMult *= (1 / MiraArController.scaleMultiplier);
         if (handedness == Handedness.Left)
@@ -194,22 +238,56 @@ public class MiraController : MonoBehaviour
             transform.localPosition = offsetPos;
         }
 
+        returnToHome = Instantiate(Resources.Load("RadialHomeTimer", typeof(GameObject))) as GameObject;
+        // homeRadialTimer.transform.localScale = (100 * (1/MiraArController.scaleMultiplier)) * Vector3.one;
+        // homeRadialTimer.transform.SetParent(MiraArController.Instance.cameraRig.transform);
+        // Vector3 relativePosition = (100 * (1/MiraArController.scaleMultiplier)) * new Vector3(0,0,0.7f);
+        // homeRadialTimer.transform.localPosition = relativePosition;
+        radialTimer = returnToHome.GetComponentInChildren<Image>();
+
+        returnToHome.SetActive(false);
+        //radialTimer.gameObject.SetActive(false);
+
+
         // shoulderRefPt = new GameObject("ShoulderRefPt").transform;
         // shoulderRefPt.parent = cameraRig;
         // shoulderRefPt.localPosition = offsetPos;
+
+        StartCoroutine(DelayedRecenter());
+
+        yield return null;
+        
     }
+
+    void RemoteConnected(Remote remote, EventArgs args)
+    {
+        Debug.Log("Controller MRRemote connected");
+		//YK moving from Awake to make sure Controller Type can be set
+		assignController();
+    }
+    void RemoteDisconnected(Remote remote, EventArgs args)
+    {
+        MiraController._userInput.OnControllerDisconnected();
+    }
+    IEnumerator DelayedRecenter()
+    {
+        yield return new WaitForSeconds(0.5f);
+        RecenterAll();
+
+    }
+
 
     private void RotateController()
     {
         if (isRotationalMode)
         {
             // Controller rotation = raw rotation relative to the last centered rotation
-            transform.rotation = baseController * _userInput.Orientation * Quaternion.Euler(angleTilt, 0, 0);
+            transform.rotation = baseController * _userInput.Orientation * Quaternion.Euler(angleTiltX, angleTiltY, 0);
         }
         else
         {
             // Set Controller Rotation to the RotationalTracking rotation, then add on the controller raw rotation relative to the controller last centered "base" rotation
-            transform.rotation = rotationalTracking.rotation * baseController * _userInput.Orientation * Quaternion.Euler(angleTilt, 0, 0);
+            transform.rotation = rotationalTracking.rotation * baseController * _userInput.Orientation * Quaternion.Euler(angleTiltX, angleTiltY, 0);
         }
     }
 
@@ -217,44 +295,21 @@ public class MiraController : MonoBehaviour
     /// Recenters the controller
     /// </summary>
     /// <returns>The all.</returns>
-    private IEnumerator RecenterAll()
+    public void RecenterAll()
     {
-        // base is the Inverse of the Current Rotation
-        // Previous solution (commented out below) Leads to weird slant when recentered when controller is rolled
-        // baseController = Quaternion.Inverse(_userInput.Orientation);
-        // This solution isn't affected by roll. Awww yisss
+
         Quaternion previousRotation = transform.rotation;
         transform.rotation = _userInput.Orientation;
         Vector3 controllerFw = transform.forward;
         controllerFw.y = 0;
         baseController = Quaternion.Inverse(Quaternion.FromToRotation(Vector3.forward, controllerFw));
         Debug.Log("Recenter");
-        // Recenter the gyro as well!
         GyroController.Instance.Recenter(true);
-        // camGyro.InitializeCamGyro();
-        // inverseGyro.CompletelyResetBaseRotation();
-        // Gotta reset it back, so it doesn't jitter all crazy-like.
+     
         transform.rotation = previousRotation;
-        // Wait a frame so the following methods have the correct values
-        yield return null;
-        // Quaternion gyroRotation;
-        // if (horizontalOnly)
-        // {
-        // 	// If horizontal only, set gyroRotation to the rotation from world forward to the current gyroforward
-        // 	Vector3 fw = gyro.transform.forward;
-        // 	baseHorizontal = fw.y;
-        // 	fw.y = 0;
-        // 	gyroRotation = Quaternion.FromToRotation(Vector3.forward, fw);
 
-        // }
-        // else
-        // {
-        // 	gyroRotation = gyro.transform.rotation;
-        // }
-        // // Since this rotation is relative to the previous base rotation, you have to take the inverse of that (since it's an inverse, you get an original rotation).
-        // // Add on the current rotation, then add on the inverse of the current gyro rotation
-        // offsetRotation =  Quaternion.Inverse(Quaternion.Inverse(offsetRotation) * transform.rotation * Quaternion.Inverse(gyroRotation));
-        // yield return null;
+       
+     
     }
 
     private void FollowHead()
@@ -263,16 +318,6 @@ public class MiraController : MonoBehaviour
         transform.position = cameraRig.position + cameraRig.rotation * offsetPos;
     }
 
-    // void TranslateController()
-    // {
-    // 	// If TrackPosition == true
-    // 	// Set local position to offsetPosition defined above
-    // 	// transform.localPosition = offsetPos;
-    // 	transform.position = shoulderRefPt.position;
-    // 	// Add the controller Arm Model Position (scaled)
-    // 	transform.localPosition += (_userInput.Position * sceneScaleMult);
-
-    // }
 
     public void updateControllerTransform()
     {
@@ -283,31 +328,115 @@ public class MiraController : MonoBehaviour
         RotateController();
     }
 
+    IEnumerator ReturnToHome()
+    {
+        float timer = 0f;
+        bool animStarted = false;
+        float animProgress = 0f;
+        while(MiraController.StartButton)
+        {
+            
+            timer += Time.deltaTime;
+            if(timer > 0.5f && animStarted == false)
+            {
+                // Start Anim (Instantiate radial timer here)
+                animStarted = true;
+                returnToHome.SetActive(true);
+            }
+            if(animStarted == true)
+            {
+                // anim progress goes from 0 to 1 from 0.5 seconds to 2 seconds
+                animProgress = (timer - 0.5f)/1.5f;
+                // Radial animation timer here
+                radialTimer.fillAmount = animProgress;
+    
+            }
+            
+            if(timer >= 2)
+            {
+                // Go back to Home
+                Debug.Log("Returning to Mira Home App");
+                timer = 0;
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator RecenterAnim()
+    {
+        float animTime = 0.5f;
+        Transform reticle = MiraReticle.Instance.transform;
+        Material reticleVis = reticle.GetComponent<Renderer>().material;
+        Color originalColor = new Color();
+        Color fadeColor = new Color();
+        if(reticleVis)
+        {
+            originalColor = reticleVis.GetColor("_ColorMult");
+            originalColor.a = 1;
+            fadeColor = originalColor;
+
+        }
+
+        float timer = 0f;
+        while(timer < animTime)
+        {
+            MiraReticle.Instance.externalMultiplier = 1 + (timer * 50);
+
+            if(reticleVis != null)
+            {
+                reticleVis.SetColor("_ColorMult", fadeColor);
+                fadeColor.a = 1 - (timer/animTime);
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        MiraReticle.Instance.externalMultiplier = 1;
+        if(reticleVis)
+        {
+            reticleVis.SetColor("_ColorMult", originalColor);
+        }
+        
+    }
+
     private void LateUpdate()
     {
+        
         if (MiraController.Instance != null)
         {
+           
             updateControllerTransform();
 
             if (MiraController.StartButtonPressed)
             {
-                StartCoroutine(RecenterAll());
+                StartCoroutine(ReturnToHome());
             }
+
+            if (MiraController.StartButtonReleased)
+            {
+                RecenterAll();
+                StartCoroutine(RecenterAnim());
+                returnToHome.SetActive(false);
+                
+            }
+
+
 
 #if UNITY_EDITOR
             // DELETE ME
             if (Input.GetKeyDown(KeyCode.R))
             {
-                StartCoroutine(RecenterAll());
+                RecenterAll();
             }
 #endif
+
+            //Updating LastFrame
+            // MiraController._userInput.UpdateLastFrameButtonData();
         }
+        
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
 
 
 	/// <summary>
@@ -319,8 +448,10 @@ public class MiraController : MonoBehaviour
 	{
 		get
 		{
-			Vector3 dir =  MiraPointerManager.PointerGameObject.transform.position - _instance.gameObject.transform.position;
-			return _instance != null ? dir : Vector3.zero;
+            if(_instance != null)
+			    return MiraPointerManager.PointerGameObject.transform.position - _instance.gameObject.transform.position;
+			else
+                return Vector3.zero;
 		}
 	}
 
@@ -864,6 +995,7 @@ public class MiraController : MonoBehaviour
     {
         if (_userInput != null)
         {
+            Debug.Log("Assigning Click Func");
             evaluateClickButton = new List<Func<bool>>();
             evaluateClickButtonPressed = new List<Func<bool>>();
             evaluateClickButtonReleased = new List<Func<bool>>();

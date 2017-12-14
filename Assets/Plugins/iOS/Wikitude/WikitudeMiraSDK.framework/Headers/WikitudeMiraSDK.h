@@ -21,6 +21,7 @@ FOUNDATION_EXPORT const unsigned char WikitudeMiraSDKVersionString[];
 
 #import <WikitudeMiraSDK/WTAuthorizationRequestManager.h>
 #import <WikitudeMiraSDK/WTNativeSDKStartupConfiguration.h>
+#import <WikitudeMiraSDK/WTExternalCMMotionManagerDataAccessMode.h>
 
 #import <WikitudeMiraSDK/WTCaptureDeviceManager.h>
 
@@ -47,6 +48,8 @@ FOUNDATION_EXPORT const unsigned char WikitudeMiraSDKVersionString[];
 #import <WikitudeMiraSDK/WTInstantTrackerConfiguration.h>
 #import <WikitudeMiraSDK/WTInitializationPose.h>
 #import <WikitudeMiraSDK/WTInstantTrackingCoordinateConversionHandler.h>
+#import <WikitudeMiraSDK/WTInstantTrackingPointCloudDataProvider.h>
+#import <WikitudeMiraSDK/WTCPPInstantTrackingPointCloudDataProvider.h>
 
 #import <WikitudeMiraSDK/WTObjectTracker.h>
 #import <WikitudeMiraSDK/WTObjectTarget.h>

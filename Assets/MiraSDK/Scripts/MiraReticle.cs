@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Mira Labs, Inc., 2017. All rights reserved.
-// 
-// Downloading and/or using this MIRA SDK is under license from MIRA, 
-// and subject to all terms and conditions of the Mira Software License,
-// found here: www.mirareality.com/sdk-license/
-// 
-// By downloading this SDK, you agree to the Mira Software License.
+//
+// Downloading and/or using this MIRA SDK is under license from MIRA,
+// and subject to all terms and conditions of the Mira SDK License Agreement,
+// found here: https://www.mirareality.com/Mira_SDK_License_Agreement.pdf
+//
+// By downloading this SDK, you agree to the Mira SDK License Agreement.
 //
 // This SDK may only be used in connection with the development of
 // applications that are exclusively created for, and exclusively available
 // for use with, MIRA hardware devices. This SDK may only be commercialized
 // in the U.S. and Canada, subject to the terms of the License.
-// 
-// The MIRA SDK includes software under license from The Apache Software Foundation.
 
 using Mira;
 using UnityEngine;
@@ -63,7 +61,7 @@ public class MiraReticle : MonoBehaviour
     private bool onlyVisibleOnHover = false;
 
     // these are in M
-    private float maxDistance = 5.0f;
+    private float maxDistance = 3f;
 
     private float minDistance = 0.5f;
 
@@ -71,6 +69,8 @@ public class MiraReticle : MonoBehaviour
     private float maxScale = 0.25f;
 
     private float lastDistance;
+
+    public float externalMultiplier = 1f;
 
     // public MiraLaserPointerLength laser;
     /// <summary>
@@ -90,23 +90,11 @@ public class MiraReticle : MonoBehaviour
     {
         validateInstance();
         reticlepointer = new MiraReticlePointer();
+
+        
     }
 
     private void Start()
-    {
-		reticlepointer.OnStart(this.gameObject);
-        reticlepointer.maxDistance = maxDistance;
-
-        float scaleAdjust = (1 / MiraArController.scaleMultiplier) * 100.0f;
-        minScale *= scaleAdjust;
-        maxScale *= scaleAdjust;
-        minDistance *= scaleAdjust;
-        maxDistance *= scaleAdjust;
-
-        reticleExit();
-    }
-
-    private void OnEnable()
     {
         cameraRig = MiraArController.Instance.cameraRig.transform;
 
@@ -115,7 +103,20 @@ public class MiraReticle : MonoBehaviour
 
         if (onlyVisibleOnHover)
             GetComponent<SpriteRenderer>().enabled = false;
+
+        float scaleAdjust = (1 / MiraArController.scaleMultiplier) * 100.0f;
+        minScale *= scaleAdjust;
+        maxScale *= scaleAdjust;
+        minDistance *= scaleAdjust;
+        maxDistance *= scaleAdjust;
+
+		reticlepointer.OnStart(this.gameObject);
+        reticlepointer.maxDistance = maxDistance;
+
+
+        reticleExit();
     }
+
 
     /// <summary>
     /// Un-hide the reticle
@@ -203,7 +204,7 @@ public class MiraReticle : MonoBehaviour
         // normalize distance
         float step = (lastDistance - minDistance) / (maxDistance - minDistance);
         float scale = Mathf.Lerp(minScale, maxScale, step);
-        transform.localScale = new Vector3(scale, scale, scale);
+        transform.localScale = new Vector3(scale, scale, scale) * externalMultiplier;
     }
 
     private void LateUpdate()
