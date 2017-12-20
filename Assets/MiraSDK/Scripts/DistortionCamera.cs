@@ -115,7 +115,7 @@ namespace Mira
                 m_dcRight = cam;
             }
 
-            mpost.InitializeDistortion(stereoFov, MiraArController.IPD);
+            mpost.InitializeDistortion(stereoFov, MiraArController.Instance.IPD);
 
             mpost.DistortionMesh();
         }

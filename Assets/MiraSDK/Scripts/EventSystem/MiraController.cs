@@ -17,7 +17,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Mira;
 using UnityEngine.XR.iOS;
 
 /// <summary>

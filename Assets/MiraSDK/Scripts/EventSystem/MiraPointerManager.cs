@@ -12,6 +12,7 @@
 // in the U.S. and Canada, subject to the terms of the License.
 
 using UnityEngine;
+using Mira;
 
 /// <summary>
 /// MiraPointerManager primarily provides the active pointer to MiraInputModule
@@ -34,7 +35,7 @@ public class MiraPointerManager : MonoBehaviour
 
             if (_instance == null)
             {
-                GameObject go = GameObject.FindObjectOfType<Mira.MiraArController>().gameObject;
+                GameObject go = GameObject.FindObjectOfType<MiraArController>().gameObject;
                 go.AddComponent<MiraPointerManager>();
                 _instance = go.GetComponent<MiraPointerManager>();
             }

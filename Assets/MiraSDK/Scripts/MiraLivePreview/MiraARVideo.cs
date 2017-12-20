@@ -7,10 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Sets up the Mira Live Preview editor to send video
+/// </summary>
 public class MiraARVideo : MonoBehaviour {
 	public Texture2D m_clearTexture;
 
-	// Use this for initialization
 	void Start() {
 		Camera.main.targetTexture = null;
 	}

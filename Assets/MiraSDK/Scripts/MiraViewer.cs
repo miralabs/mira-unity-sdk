@@ -43,12 +43,12 @@ namespace Mira
         /// <summary>
         ///  Left Eye Camera
         /// </summary>
-        public static GameObject Left_Eye = null;
+        public GameObject Left_Eye = null;
 
         /// <summary>
         ///  Right Eye Camera
         /// </summary>
-        public static GameObject Right_Eye = null;
+        public GameObject Right_Eye = null;
 
         /// <summary>
         /// CameraNames contains the list of cameras in the camerarig.
@@ -63,52 +63,25 @@ namespace Mira
 
         #region Properties
 
-        private static MiraViewer instance = null;
-
-        /// <summary>
-        /// The Instance can be used to acces Data Members and Methods
-        /// </summary>
-        public static MiraViewer Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = UnityEngine.Object.FindObjectOfType<MiraViewer>();
-                }
-
-                return instance;
-            }
-        }
-
+        public static MiraViewer Instance = null;
+       
         #endregion Properties
 
         #region Unity callbacks
 
         public void Awake()
         {
+            if (Instance == null) Instance = this;
+            else if (Instance != this) Destroy(gameObject);
             Application.targetFrameRate = 60;
             gameObject.GetComponent<Transform>().hideFlags = HideFlags.HideInInspector;
+
+            stereoCamFov = MiraArController.Instance.fieldOfView;
         }
 
         #endregion Unity callbacks
 
         #region Public Methods
-
-        public MiraViewer(float fov)
-        {
-            stereoCamFov = fov;
-        }
-
-        public void Create()
-        {
-            if (instance == null && UnityEngine.Object.FindObjectOfType<MiraViewer>() == null)
-            {
-                GameObject go = new GameObject("MiraViewer", typeof(MiraViewer));
-                go.transform.localPosition = Vector3.zero;
-                viewer = go;
-            }
-        }
 
         /// <summary>
         /// Creates the Stereo Cameras individually.
@@ -154,7 +127,7 @@ namespace Mira
             {
                 eyecamera.tag = "MainCamera";
                 eyecamera.rect = new Rect(0f, 0f, 1f, 1f);
-                eyecamera.transform.localPosition = new Vector3(-MiraArController.IPD / 2 * 0.1f * (1 / MiraArController.scaleMultiplier), 0f, 0f);
+                eyecamera.transform.localPosition = new Vector3(-MiraArController.Instance.IPD / 2 * 0.1f * (1 / MiraArController.scaleMultiplier), 0f, 0f);
                 MiraArController.Instance.leftCam = eyecamera.gameObject;
             }
             else
@@ -162,7 +135,7 @@ namespace Mira
                 // frust.slideX = -asymmetricFrustrumSlide;
                 eyecamera.rect = new Rect(0f, 0f, 1f, 1f);
 
-                eyecamera.transform.localPosition = new Vector3(MiraArController.IPD / 2 * 0.1f * (1 / MiraArController.scaleMultiplier), 0f, 0f);
+                eyecamera.transform.localPosition = new Vector3(MiraArController.Instance.IPD / 2 * 0.1f * (1 / MiraArController.scaleMultiplier), 0f, 0f);
 
                 MiraArController.Instance.rightCam = eyecamera.gameObject;
             }

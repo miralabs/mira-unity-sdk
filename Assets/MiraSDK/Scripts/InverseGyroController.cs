@@ -26,7 +26,7 @@ namespace Mira
 
         private void Start()
         {
-            stereoCamRig = Mira.MiraArController.Instance.gameObject.transform;
+            stereoCamRig = MiraArController.Instance.gameObject.transform;
             transform.position = stereoCamRig.position;
 
             this.enabled = false;

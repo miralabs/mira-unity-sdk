@@ -11,15 +11,24 @@ using Utils;
 
 namespace UnityEngine.XR.iOS
 {
+	/// <summary>
+	/// Sends images of the screen from the editor to the Live Preview app player
+	/// </summary>
 	public class MiraLivePreviewVideo : MonoBehaviour {
 #if UNITY_EDITOR
 		public MiraLivePreviewEditor remoteConnection;
 
 		[Range(1,100)]
 		[Tooltip("Quality/size of the streamed image")]
+		/// <summary>
+		/// Quality/size of the streamed image
+		/// </summary>
 		public int m_jpegQuality = 50;
 		[Range(1,30)]
 		[Tooltip("How frequently an image is sent in frames")]
+		/// <summary>
+		/// How frequently an image is sent in frames
+		/// </summary>
 		public int m_captureInterval = 3;
 		private bool bCapturingFrame = false;
 		private bool bCapturedFrameAvailable = false;

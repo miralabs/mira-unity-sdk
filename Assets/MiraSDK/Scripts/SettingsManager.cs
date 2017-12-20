@@ -15,7 +15,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mira;
 
+/// <summary>
+/// Manages the settings menu, that allows the user to change remotes, return to the mira home app, etc
+/// </summary>
 public class SettingsManager : MonoBehaviour {
 	public GameObject MainSettingsMenu;
 	public GameObject RemoteMenu;
@@ -99,8 +103,8 @@ public class SettingsManager : MonoBehaviour {
 		RemoteMenu.SetActive(false);
 		MainSettingsMenu.SetActive(false);
 		// Re-enables MiraInputModule (temporarily), and hides this menu
-		if(Mira.MiraArController.Instance!=null)
-			Mira.MiraArController.Instance.ToggleSettingsMenu(false);
+		if(MiraArController.Instance!=null)
+			MiraArController.Instance.ToggleSettingsMenu(false);
 		else
 			settingsButton.SetActive(true);
 

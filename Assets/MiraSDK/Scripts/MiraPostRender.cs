@@ -25,7 +25,6 @@ namespace Mira
         /// </summary>
         public enum Eye { Left, Right };
 
-        // Make sure to check that this fov matches the MiraViewer FOV
         /// <summary>
         /// The field of view of the Stereo Camera Rig
         /// </summary>
@@ -81,7 +80,7 @@ namespace Mira
         public float desiredParallaxDist = 1.5f;
         private Mesh mesh;
         private Material renderTextureMaterial;
-        public float IPD;
+        private float IPD;
 
         // public float ParallaxShift = 1.89f;
         public float ParallaxShift = 0f;
@@ -93,6 +92,8 @@ namespace Mira
 
 
         private DistortionEquation distortion;
+
+        
 
         public void InitializeDistortion(float fieldOfView, float ipd)
         {
@@ -136,6 +137,14 @@ namespace Mira
             // Debug.Log("Hybrid Angle: " + hybridAngle);
 
             ParallaxShift = hybridAngle;
+        }
+
+        public void RecalculateDistortion()
+        {
+            IPD = MiraArController.Instance.IPD;
+            CorrectParallax(MiraArController.Instance.fieldOfView);
+            DistortionMesh();
+            
         }
 
         private void OnValidate()

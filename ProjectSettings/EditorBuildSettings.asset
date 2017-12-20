@@ -17,12 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MiraSDK/Scenes/SpectatorTemplate.unity
     guid: 7196e9f90aa4a4679afe4d9c51b8ce95
-  - enabled: 0
+  - enabled: 1
     path: Assets/MiraSDK/Scenes/MiraLivePreviewApp.unity
     guid: d0f71a3c2aec64cf2b4370b9d7434771
   - enabled: 0
     path: Assets/MiraSDK/Scenes/Tutorials/102_ControllerInteractions.unity
     guid: 73b843499980d493ea21ac1ba80a5153
-  - enabled: 1
+  - enabled: 0
     path: Assets/MiraSDK/Scenes/Tutorials/104_SpectatorModeTutorial.unity
     guid: d77d3379bf5bb4bd9bd12cace1991537

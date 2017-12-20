@@ -12,23 +12,23 @@
 // in the U.S. and Canada, subject to the terms of the License.
 
 using UnityEngine;
-
 namespace Mira
 {
-    /// <summary>
-    /// MiraArController sets up the required settings for all Mira Modes.
-    /// This Script should be present in the Scene on the same Gameobject as you Camera used for Tracking if using Image or Object Tracking.(for eg,MiraArCamera, WikitudeCamera).
-    /// This Instance of the class should be used to access the public methods or data members.
-    /// </summary>
+/// <summary>
+/// MiraArController sets up the required settings for all Mira Modes.
+/// This Script should be present in the Scene on the same Gameobject as you Camera used for Tracking if using Image or Object Tracking.(for eg,MiraArCamera, WikitudeCamera).
+/// This Instance of the class should be used to access the public methods or data members.
+/// </summary>
     public class MiraArController : MonoBehaviour
     {
         #region Public Variables
+
 
         /// <summary>
         /// Calibrate values, then use these to universally set them at start
         // IPD must always be in MM (for distortion algorithm)
         /// </summary>
-        public static float IPD = 63.5f;
+        public float IPD = 63.5f;
 
 
         /// <summary>
@@ -82,6 +82,8 @@ namespace Mira
         /// If you are creating a new game, we recoomend that you keep the scaleMultiplier at 100 (meterscale)
         /// </summary>
         public static float scaleMultiplier = 100;
+
+        public float fieldOfView { get {return stereoCamFov; } }
 
         #endregion Public Variables
 
@@ -199,12 +201,14 @@ namespace Mira
         {
 
             // Force screen brightness
-#if UNITY_IOS
-				MiraiOSBridge.ForceBrightness();
-#endif
+    #if UNITY_IOS
+                MiraiOSBridge.ForceBrightness();
+    #endif
 
             SanityCheck();
         }
+
+        
 
         void DeviceOrientation()
         {
@@ -222,13 +226,27 @@ namespace Mira
 
         #region Public Functions
 
+        public void UpdateIPD(float newIPD)
+        {
+            IPD = newIPD; 
+            float camOffset = newIPD/2 * 0.1f * (1 / scaleMultiplier);
+            MiraViewer.Instance.Left_Eye.transform.localPosition = new Vector3(-camOffset, 0, 0);
+            MiraViewer.Instance.Right_Eye.transform.localPosition = new Vector3(camOffset, 0, 0);
+
+            MiraPostRender distortionL = DistortionCamera.Instance.dcLeft.GetComponent<MiraPostRender>();
+            MiraPostRender distortionR = DistortionCamera.Instance.dcRight.GetComponent<MiraPostRender>();
+
+            distortionL.RecalculateDistortion();
+            distortionR.RecalculateDistortion();
+
+        }
+
         /// <summary>
         /// Initializes the MiraArCamera and MiraViewer.
         /// </summary>
         public void InitializeARController()
         {
-            mv = new MiraViewer(stereoCamFov);
-            mv.Create();
+            mv = gameObject.AddComponent<MiraViewer>();
             if (isSpectator)
             {
                 CreateSpecCamRig();
@@ -298,5 +316,6 @@ namespace Mira
         }
 
         #endregion Private Functions
+        
     }
 }

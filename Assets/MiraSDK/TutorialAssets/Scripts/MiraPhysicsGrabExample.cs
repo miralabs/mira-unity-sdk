@@ -65,7 +65,7 @@ public class MiraPhysicsGrabExample : MonoBehaviour, IPointerDownHandler
 
             float touchInfluence = 0.0f;
             float thisTouch = 0.0f;
-            if (MiraController.TouchHeld == true && lastTouchPosition != null)
+            if (MiraController.TouchHeld == true)
             {
                 // MiraController.Touchpos.Y goes from 1 to 0 , near to far
                 // we want to change this so the touchpad closer to the user returns negative values

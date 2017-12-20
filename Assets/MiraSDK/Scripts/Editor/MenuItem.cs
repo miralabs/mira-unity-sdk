@@ -146,7 +146,7 @@ public class MenuItems : EditorWindow
             //     PlayerSettings.iOS.targetOSVersionString = "8.0";
             // }
 		GUILayout.Space(15);
-		GUILayout.Label ("Mira SDK 0.7.0.", EditorStyles.boldLabel);
+		GUILayout.Label ("Mira SDK 0.7.1.", EditorStyles.boldLabel);
         }
     }
 

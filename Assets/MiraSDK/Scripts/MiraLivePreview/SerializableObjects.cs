@@ -77,7 +77,7 @@ namespace Utils
 			return new SerializableVector3(rValue.x, rValue.y, rValue.z);
 		}
 	}
-
+	/// <summary>
 	/// Since unity doesn't flag the Vector2 as serializable, we
 	/// need to create our own version. This one will automatically convert
 	/// between Vector3 and SerializableVector3
@@ -286,6 +286,9 @@ namespace Utils
 		}
 	}
 	[System.Serializable]
+	/// <summary>
+	/// To keep things in a consistent format, here is a serializeable float!
+	/// </summary>
 	public class serializableFloat
 	{
 		public float x;
@@ -309,7 +312,9 @@ namespace Utils
 			return new serializableFloat(rValue);
 		}
 	}
-
+	/// <summary>
+	/// Serialized attitude and acceleration of a device's gyroscope
+	/// </summary>
 	[Serializable]  
 	public class serializableGyroscope {
 		public SerializableQuaternion attitude;
@@ -323,31 +328,32 @@ namespace Utils
 		public static implicit operator serializableGyroscope(Gyroscope rValue) {
 			return new serializableGyroscope(rValue.attitude, rValue.userAcceleration);
 		}
-
-		// public static implicit operator Gyroscope(serializableGyroscope rValue) {
-		// 	return new Gyroscope();
-		// }
 	}
 
 	[Serializable]
-	public class serializableWikiCam
+	/// <summary>
+	/// This serializes an object's position and rotation
+	/// </summary>
+	public class serializableTransform
 	{
-		public SerializableVector3 camPosition;
-		public SerializableQuaternion camRotation;
+		public SerializableVector3 position;
+		public SerializableQuaternion rotation;
 
-		public serializableWikiCam(SerializableVector3 p, SerializableQuaternion r) {
-			camPosition = p;
-			camRotation = r;
+		public serializableTransform(SerializableVector3 p, SerializableQuaternion r) {
+			position = p;
+			rotation = r;
 		}
 	
-		public static implicit operator serializableWikiCam(Transform _wikiCam) {
-			return new serializableWikiCam(_wikiCam.position, _wikiCam.rotation);
+		public static implicit operator serializableTransform(Transform _object) {
+			return new serializableTransform(_object.position, _object.rotation);
 		}
 
 
 	}
 
-
+	/// <summary>
+	/// Serializes the orientation, rotationRate, and acceleration of a Mira Prism Remote
+	/// </summary>
 	[Serializable]
 	public class serializableBTRemote {
 		
@@ -368,6 +374,9 @@ namespace Utils
 
 
 	[Serializable]
+	/// <summary>
+	/// Serializes the touchPad axes and buttons on the Mira Prism remote
+	/// </summary>
 	public class serializableBTRemoteTouchPad {
 		
 		public bool touchActive;
@@ -414,6 +423,9 @@ namespace Utils
 	}
 
 	[Serializable]
+	/// <summary>
+	/// Serializes the buttons (start, back, trigger) on the Mira Prism remote
+	/// </summary>
 	public class serializableBTRemoteButtons {
 		public bool startButton;
 		

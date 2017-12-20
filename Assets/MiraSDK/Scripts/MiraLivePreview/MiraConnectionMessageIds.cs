@@ -7,6 +7,9 @@ using System;
 
 namespace UnityEngine.XR.iOS
 {
+	/// <summary>
+	/// Guids for editor-player connections in the Mira Live Preview App
+	/// </summary>
 	public static class MiraConnectionMessageIds
 	{
 		public static Guid fromEditorMiraSessionMsgId { get { return new Guid("b4c939fd-6ece-49c8-bd2b-83cfb85b66e6"); } }

@@ -12,6 +12,10 @@ using UnityEngine.UI;
 using System;
 
 namespace UnityEngine.XR.iOS {
+	/// <summary>
+	/// Controls the player side of the editor-player connection for the Mira Live Preview app.
+	/// This gets run on the device itself, and sends data to the editor
+	/// </summary>
 	public class MiraLivePreviewPlayer : MonoBehaviour {
 		PlayerConnection playerConnection;
 		bool bSessionActive;
@@ -170,7 +174,7 @@ namespace UnityEngine.XR.iOS {
 
 		void UpdateWikiCam() 
 		{
-			serializableWikiCam sWikiCam = Camera.main.transform;
+			serializableTransform sWikiCam = Camera.main.transform;
 			SendToEditor(MiraConnectionMessageIds.wikiCamMsgId, sWikiCam);
 		}
 

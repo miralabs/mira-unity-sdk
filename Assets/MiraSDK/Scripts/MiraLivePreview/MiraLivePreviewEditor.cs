@@ -8,31 +8,42 @@ using UnityEngine.Networking.PlayerConnection;
 using System.Text;
 using Utils; 
 using System;
+using Mira;
 #if UNITY_EDITOR
 using UnityEditor.Networking.PlayerConnection;
 #endif
 
 namespace UnityEngine.XR.iOS {
+	/// <summary>
+	/// Controls the editor side of the editor-player connection for the Mira Live Preview app
+	/// </summary>
 	public class MiraLivePreviewEditor : MonoBehaviour {
 #if UNITY_EDITOR
-		// Static instance of MiraLivePreviewEditor which allows it to be accessed by any other script.
+		/// <summary>
+		/// Static instance of MiraLivePreviewEditor which allows it to be accessed by any other script.
+		/// </summary>
 		public static MiraLivePreviewEditor Instance = null;
 		EditorConnection editorConnection;
 
 		private bool bSessionActive;
+		/// <summary>
+		/// Is the session active?
+		/// </summary>
+		/// <returns></returns>
         public bool SessionActive { get { return bSessionActive; } }
 		int currentPlayerID = -1;
 		string guimessage = "none";
 
 		private VirtualRemote vrtlRemote;
 
-		// private MiraVirtualInput m_miraVirtualInput;
-		// public MiraVirtualInput miraVirtualInput { get { return m_miraVirtualInput; } }
-
 		private Quaternion m_attitude;
+		/// <summary>
+		/// The attitude of the gyro, being sent over from the player device
+		/// </summary>
+		/// <returns></returns>
 		public Quaternion attitude { get { return m_attitude; } }
 
-		private serializableWikiCam sWikiCam;
+		private serializableTransform sWikiCam;
 		
 		private bool playerIsTracking = false;
 		
@@ -44,7 +55,6 @@ namespace UnityEngine.XR.iOS {
             DontDestroyOnLoad(gameObject);
         }
 
-		// Use this for initialization
 		void Start() {
 			bSessionActive = false;
 
@@ -118,8 +128,8 @@ namespace UnityEngine.XR.iOS {
 		void ReceiveRemoteWikiCam(MessageEventArgs mea) {
 			if (playerIsTracking)
 			{
-				sWikiCam = mea.data.Deserialize<serializableWikiCam>();
-				MiraWikitudeManager.Instance.MiraRemoteTracking(sWikiCam.camPosition, sWikiCam.camRotation);
+				sWikiCam = mea.data.Deserialize<serializableTransform>();
+				MiraWikitudeManager.Instance.MiraRemoteTracking(sWikiCam.position, sWikiCam.rotation);
 			} 
 		}
 		void TrackingFound(MessageEventArgs mea)
@@ -161,7 +171,7 @@ namespace UnityEngine.XR.iOS {
 			serializableFromEditorMessage sfem = new serializableFromEditorMessage();
 			sfem.subMessageId = MiraSubMessageIds.editorInitMiraRemote;
 			// sfem.bytes = BitConverter.GetBytes(Mira.MiraArController.Instance.isRotationalOnly);
-			sfem.bytes = new byte[]{Convert.ToByte(Mira.MiraArController.Instance.isRotationalOnly)};
+			sfem.bytes = new byte[]{Convert.ToByte(MiraArController.Instance.isRotationalOnly)};
 			SendToPlayer(MiraConnectionMessageIds.fromEditorMiraSessionMsgId, sfem);
 			
             bSessionActive = true;
@@ -197,10 +207,7 @@ namespace UnityEngine.XR.iOS {
 			SendToPlayer(msgId, arrayToSend);
 		}
 
-		void Update() {
-			
-			
-		}
+
 	#endif
 	}
 	
