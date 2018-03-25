@@ -16,5 +16,10 @@ The latest version of the SDK can be found [on our GitHub repo](https://github.c
 
 For more information and products, visit our website at https://www.mirareality.com.
 
+## Dependencies
+
+Requires Unity 5.5 or above.  
+There are no additional dependencies.
+
 # License
 See [`LICENSE.md`](LICENSE.md)
