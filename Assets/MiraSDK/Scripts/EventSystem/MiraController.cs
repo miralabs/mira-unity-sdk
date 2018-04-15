@@ -510,7 +510,7 @@ public class MiraController : MonoBehaviour
     {
         get
         {
-            return _instance != null ? _userInput.Gyro : Vector3.zero;
+            return _instance != null ? _userInput.Accel : Vector3.zero;
         }
     }
 
