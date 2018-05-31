@@ -22,7 +22,7 @@ public class MiraGrabExample : MonoBehaviour, IPointerDownHandler
 
     private bool isGrabbing = false;
 
-    private float lastTouchPosition;
+    private float? lastTouchPosition;
 
     // these OnPointer functions are automatically called when
     // the pointer interacts with a game object that this script is attached to
@@ -64,7 +64,7 @@ public class MiraGrabExample : MonoBehaviour, IPointerDownHandler
                 // scale it down so it's not too strong
                 thisTouch *= 0.05f;
 
-                touchInfluence = lastTouchPosition - thisTouch;
+                touchInfluence = (lastTouchPosition ?? 0f) - thisTouch;
             }
             lastTouchPosition = thisTouch;
 

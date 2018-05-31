@@ -24,9 +24,6 @@ public class RemoteButtonInput
     public delegate void RemoteButtonInputEventHandler(RemoteButtonInput touchInput, EventArgs e);
     //Button Events that will be trigger internally
     public event RemoteButtonInputEventHandler OnPressChanged;
-    public event RemoteButtonInputEventHandler OnHeldState;
-    public event RemoteButtonInputEventHandler OnPresseddState;
-    public event RemoteButtonInputEventHandler OnReleasedState;
 
     private int m_PrevFrameCount=-1;
 
@@ -38,7 +35,6 @@ public class RemoteButtonInput
     private bool _isPressed = false;
     private bool _onPressed = false;
     private bool _onReleased = false;
-    private bool _onHeld = false;
 	// private bool _lastframe = false;
 
     //Button Properties
@@ -149,7 +145,6 @@ public class RemoteButtonInput
          _isPressed = false;
          _onPressed = false;
          _onReleased = false;
-         _onHeld = false;
 	     // _lastframe = false;
          m_State = false;
          m_PrevState = false;

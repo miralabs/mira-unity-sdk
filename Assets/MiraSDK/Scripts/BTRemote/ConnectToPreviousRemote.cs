@@ -18,7 +18,7 @@ using System;
 
 public class ConnectToPreviousRemote : MonoBehaviour {
 
-	Guid lastRemoteID;
+	Guid? lastRemoteID;
 
 	bool activelySearching;
 

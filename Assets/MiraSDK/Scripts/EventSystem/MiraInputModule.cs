@@ -440,7 +440,7 @@ namespace UnityEngine.EventSystems
         // walk up the tree till a common root between the last entered and the current entered is found
         // send exit events up to (but not inluding) the common root. Then send enter events up to
         // (but not including the common root).
-        protected void HandlePointerExitAndEnter(PointerEventData currentPointerData, GameObject newEnterTarget)
+        protected new void HandlePointerExitAndEnter(PointerEventData currentPointerData, GameObject newEnterTarget)
         {
             // if we have no target / pointerEnter has been deleted
             // just send exit events to anything we are tracking
@@ -595,9 +595,6 @@ namespace UnityEngine.EventSystems
         /// <param name="mouseData">Mouse data.</param>
         protected void ProcessMouseEvent(MouseState mouseData)
         {
-            var pressed = mouseData.AnyPressesThisFrame();
-            var released = mouseData.AnyReleasesThisFrame();
-
             var leftButtonData = mouseData.GetButtonState(PointerEventData.InputButton.Left).eventData;
 
             // Process the first mouse button fully

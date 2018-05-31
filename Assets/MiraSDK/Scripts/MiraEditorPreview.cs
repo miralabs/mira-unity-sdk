@@ -36,7 +36,6 @@ namespace Mira
         private float rotationAmount = 2f;
 
         private Quaternion additionalCamRotation = Quaternion.identity;
-        private Quaternion verticalOffset = Quaternion.identity;
 
         private void Start()
         {
@@ -96,7 +95,6 @@ namespace Mira
             {
                 // Allow the script to clamp based on a desired target value.
                 var targetOrientation = Quaternion.Euler(targetDirection);
-                var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
 
                 // Get raw mouse input for a cleaner reading on more sensitive mice.
                 var mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), -Input.GetAxisRaw("Mouse Y"));
@@ -119,7 +117,6 @@ namespace Mira
                 if (clampInDegrees.y < 360)
                     _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
                 transform.rotation = additionalCamRotation;
-                verticalOffset = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right);
                 transform.localRotation *= Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
 
                 var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));

@@ -53,8 +53,6 @@ public class MiraWikitudeManager : TransformOverride
     private Vector3 positionalOffset;
 
     private RotationalTrackingManager rotationalTracking;
-    
-    private bool flag = false;
 
     #endregion PrivateVariables
 

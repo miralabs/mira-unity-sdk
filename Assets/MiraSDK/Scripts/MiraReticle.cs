@@ -84,7 +84,6 @@ public class MiraReticle : MonoBehaviour
     public Color reticleIdleColor = Color.white;
 
     private SpriteRenderer reticleRenderer;
-    private Vector3 reticleOriginalScale;
 
     private void Awake()
     {
@@ -99,7 +98,6 @@ public class MiraReticle : MonoBehaviour
         cameraRig = MiraArController.Instance.cameraRig.transform;
 
         reticleRenderer = GetComponent<SpriteRenderer>();
-        reticleOriginalScale = this.transform.localScale;
 
         if (onlyVisibleOnHover)
             GetComponent<SpriteRenderer>().enabled = false;
